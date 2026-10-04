@@ -24,6 +24,8 @@ export interface HeatMap3DProps {
   variant: 'hero' | 'console';
   /** 0..1 scroll progress for the hero choreography */
   progressRef?: MutableRefObject<number>;
+  /** hero only: the visible card as fractions of the canvas (height, width); the camera fits the whole state in it */
+  fitRef?: MutableRefObject<{ h: number; w: number }>;
   selected?: number | null;
   onSelect?: (id: number) => void;
   onHover?: (id: number | null) => void;
@@ -275,22 +277,91 @@ function GraphLayer({
 }
 
 // ── camera choreography ───────────────────────────────────────────────────────────────────────────────────────────
-function HeroRig({ progressRef }: { progressRef?: MutableRefObject<number> }) {
-  const { camera, pointer, scene } = useThree();
+function HeroRig({
+  progressRef,
+  fitRef,
+  built,
+  data,
+}: {
+  progressRef?: MutableRefObject<number>;
+  fitRef?: MutableRefObject<{ h: number; w: number }>;
+  built: Built[];
+  data: MapDatum[];
+}) {
+  const { camera, pointer, scene, size } = useThree();
   const look = useMemo(() => new THREE.Vector3(), []);
   const pos = useMemo(() => new THREE.Vector3(), []);
-  // start: the whole state framed inside the card · end: low over Vidarbha, the hot core
-  const a = useMemo(() => ({ from: new THREE.Vector3(0.3, 15.2, 10.6), to: new THREE.Vector3(5.4, 3.3, 6.2) }), []);
+  const target0 = useMemo(() => new THREE.Vector3(0, 0.35, 0.1), []);
+  // end of the scroll: low over Vidarbha, the hot core
+  const to = useMemo(() => new THREE.Vector3(5.4, 3.3, 6.2), []);
+  // start direction: an oblique ~40° view, which suits a wide, short card better than a top-down one
+  const dir = useMemo(() => new THREE.Vector3(0.25, 8.2, 9.6).normalize(), []);
+  const probe = useMemo(() => new THREE.PerspectiveCamera(), []);
+  // every outline vertex, at ground level and at the top of its own pillar (+ room for the graph arcs)
+  const corners = useMemo(() => {
+    const out: THREE.Vector3[] = [];
+    built.forEach((b) => {
+      const top = heightFor(data[b.id].tmax) + 0.35;
+      b.outline.forEach((ring) =>
+        ring.forEach((pt, i) => {
+          if (i % 2) return;
+          out.push(new THREE.Vector3(pt.x, 0, pt.z), new THREE.Vector3(pt.x, top, pt.z));
+        }),
+      );
+    });
+    return out;
+  }, [built, data]);
+  const fitted = useRef({ key: '', from: new THREE.Vector3(0.25, 8.2, 9.6) });
+  const v = useMemo(() => new THREE.Vector3(), []);
+  const placed = useRef(false);
+
+  /** Smallest camera distance (along the start direction) at which every corner lands inside the card. */
+  const fitFrom = (h: number, w: number) => {
+    const persp = camera as THREE.PerspectiveCamera;
+    probe.fov = persp.fov;
+    probe.aspect = size.width / Math.max(1, size.height);
+    probe.near = 0.1;
+    probe.far = 200;
+    probe.updateProjectionMatrix();
+    const fits = (d: number) => {
+      probe.position.copy(target0).addScaledVector(dir, d);
+      probe.lookAt(target0);
+      probe.updateMatrixWorld();
+      return corners.every((c) => {
+        v.copy(c).project(probe);
+        return Math.abs(v.x) <= w * 0.92 && Math.abs(v.y) <= h * 0.88;
+      });
+    };
+    let lo = 4;
+    let hi = 120;
+    for (let i = 0; i < 28; i++) {
+      const mid = (lo + hi) / 2;
+      if (fits(mid)) hi = mid;
+      else lo = mid;
+    }
+    return target0.clone().addScaledVector(dir, hi);
+  };
+
   useFrame(({ clock }, dt) => {
+    const f = fitRef?.current ?? { h: 0.9, w: 0.9 };
+    const key = `${size.width}x${size.height}:${f.h.toFixed(3)}:${f.w.toFixed(3)}`;
+    if (fitted.current.key !== key) fitted.current = { key, from: fitFrom(f.h, f.w) };
+    const from = fitted.current.from;
+
     const p = progressRef?.current ?? 0;
     const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
     const t = clock.elapsedTime;
-    pos.lerpVectors(a.from, a.to, e);
-    pos.x += Math.sin(t * 0.18) * 0.35 + pointer.x * 0.5;
-    pos.y += Math.cos(t * 0.21) * 0.12 + pointer.y * 0.25;
-    const k = 1 - Math.exp(-dt * 3);
-    camera.position.lerp(pos, k);
-    look.set(THREE.MathUtils.lerp(0, 1.4, e), 0.3, THREE.MathUtils.lerp(0.35, -0.4, e));
+    pos.lerpVectors(from, to, e);
+    // idle drift and pointer parallax, scaled down while the whole state must stay in frame
+    const sway = 0.25 + 0.75 * e;
+    pos.x += (Math.sin(t * 0.18) * 0.3 + pointer.x * 0.45) * sway;
+    pos.y += (Math.cos(t * 0.21) * 0.1 + pointer.y * 0.2) * sway;
+    // first frame: start exactly on the fitted framing so the whole state is visible from the first paint
+    if (!placed.current) {
+      placed.current = true;
+      camera.position.copy(pos);
+    } else camera.position.lerp(pos, 1 - Math.exp(-dt * 3));
+    look.set(THREE.MathUtils.lerp(target0.x, 1.4, e), THREE.MathUtils.lerp(target0.y, 0.3, e), THREE.MathUtils.lerp(target0.z, -0.4, e));
     camera.lookAt(look);
     // keep the fog band around the map whatever the camera distance
     if (scene.fog instanceof THREE.Fog) {
@@ -303,7 +374,20 @@ function HeroRig({ progressRef }: { progressRef?: MutableRefObject<number> }) {
 }
 
 /** Projects label anchors to screen space every frame and moves plain DOM labels (no extra React roots). */
-function LabelProjector({ built, data, labels, els }: { built: Built[]; data: MapDatum[]; labels: number[]; els: MutableRefObject<(HTMLDivElement | null)[]> }) {
+function LabelProjector({
+  built,
+  data,
+  labels,
+  els,
+  progressRef,
+}: {
+  built: Built[];
+  data: MapDatum[];
+  labels: number[];
+  els: MutableRefObject<(HTMLDivElement | null)[]>;
+  /** hero: labels stay hidden until the camera has dived in, so they never pile up on the small overview */
+  progressRef?: MutableRefObject<number>;
+}) {
   const { camera, size } = useThree();
   const v = useMemo(() => new THREE.Vector3(), []);
   useFrame(() => {
@@ -311,11 +395,12 @@ function LabelProjector({ built, data, labels, els }: { built: Built[]; data: Ma
       const el = els.current[i];
       if (!el) return;
       v.set(built[id].centroid[0], heightFor(data[id].tmax) + 0.12, built[id].centroid[1]).project(camera);
-      if (v.z > 1) {
+      const show = progressRef ? Math.min(1, Math.max(0, (progressRef.current - 0.3) / 0.15)) : 1;
+      if (v.z > 1 || show === 0) {
         el.style.opacity = '0';
         return;
       }
-      el.style.opacity = '1';
+      el.style.opacity = show.toFixed(2);
       el.style.transform = `translate3d(${(((v.x + 1) / 2) * size.width).toFixed(1)}px, ${(((1 - v.y) / 2) * size.height).toFixed(1)}px, 0) translate(-50%, -130%)`;
     });
   });
@@ -393,11 +478,11 @@ function Scene(props: HeatMap3DProps & { built: Built[]; labelEls: MutableRefObj
           />
         ))}
         {showGraph && <GraphLayer built={built} data={data} bfs={bfs} rise={rise} />}
-        <LabelProjector built={built} data={data} labels={labels} els={props.labelEls} />
+        <LabelProjector built={built} data={data} labels={labels} els={props.labelEls} progressRef={variant === 'hero' ? progressRef : undefined} />
       </group>
 
       {variant === 'hero' ? (
-        <HeroRig progressRef={progressRef} />
+        <HeroRig progressRef={progressRef} fitRef={props.fitRef} built={built} data={data} />
       ) : (
         <OrbitControls
           makeDefault
@@ -435,7 +520,7 @@ export default function HeatMap3D(props: HeatMap3DProps) {
         shadows={props.tier === 'high' ? 'percentage' : false}
         dpr={dpr}
         frameloop={props.active === false ? 'never' : 'always'}
-        camera={{ position: props.variant === 'hero' ? [0.3, 15.2, 10.6] : [1.4, 9.8, 9.6], fov: 34, near: 0.1, far: 120 }}
+        camera={{ position: props.variant === 'hero' ? [0.25, 8.2, 9.6] : [1.4, 9.8, 9.6], fov: 34, near: 0.1, far: 120 }}
         gl={{ antialias: props.tier !== 'high', powerPreference: 'high-performance', alpha: false }}
         onCreated={({ gl }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping;
@@ -452,7 +537,7 @@ export default function HeatMap3D(props: HeatMap3DProps) {
             ref={(el) => {
               labelEls.current[i] = el;
             }}
-            className="absolute left-0 top-0 whitespace-nowrap rounded-full border border-white/20 bg-[#1a2531]/80 px-2.5 py-1 font-mono text-[11px] text-cloud opacity-0 shadow-lg backdrop-blur transition-opacity duration-300 will-change-transform"
+            className="absolute left-0 top-0 whitespace-nowrap rounded-full border border-white/20 bg-[#1a2531]/80 px-2.5 py-1 font-mono text-[11px] text-cloud opacity-0 shadow-lg backdrop-blur will-change-transform"
           >
             <span className="mr-1.5 inline-block size-1.5 rounded-full align-middle" style={{ background: LEVEL_HEX[props.data[id].level] }} />
             {DISTRICTS[id].name} <span className="text-silver">{props.data[id].tmax.toFixed(1)}°</span>

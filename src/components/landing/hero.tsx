@@ -20,15 +20,18 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const HeatMap3D = dynamic(() => import('@/components/three/heat-map-3d'), { ssr: false });
 
-/** Card geometry (fractions of the viewport) before the scroll expands it to full-bleed. */
-const CARD = {
-  desktop: { top: 0.55, side: 0.07, bottom: 0.035, radius: 32 },
-  mobile: { top: 0.5, side: 0.04, bottom: 0.03, radius: 24 },
-};
-/** How far the canvas is pushed down so the map sits in the middle of the card, not behind the copy (% of vh). */
-const canvasShift = (c: (typeof CARD)['desktop']) => ((c.top + (1 - c.bottom)) / 2 - 0.5) * 100;
-const inset = (c: (typeof CARD)['desktop'], k: number) =>
-  `inset(${(c.top * 100 * (1 - k)).toFixed(3)}% ${(c.side * 100 * (1 - k)).toFixed(3)}% ${(c.bottom * 100 * (1 - k)).toFixed(3)}% ${(c.side * 100 * (1 - k)).toFixed(3)}% round ${(c.radius * (1 - k)).toFixed(2)}px)`;
+/** Card geometry as fractions of the sticky viewport, measured from the layout slot under the copy. */
+interface CardGeo {
+  top: number;
+  side: number;
+  bottom: number;
+  radius: number;
+}
+const DEFAULT_GEO: CardGeo = { top: 0.56, side: 0.07, bottom: 0.035, radius: 32 };
+/** Push the canvas down so its centre — where the camera looks — sits in the middle of the card (% of height). */
+const canvasShift = (g: CardGeo) => ((g.top + (1 - g.bottom)) / 2 - 0.5) * 100;
+const inset = (g: CardGeo, k: number) =>
+  `inset(${(g.top * 100 * (1 - k)).toFixed(3)}% ${(g.side * 100 * (1 - k)).toFixed(3)}% ${(g.bottom * 100 * (1 - k)).toFixed(3)}% ${(g.side * 100 * (1 - k)).toFixed(3)}% round ${(g.radius * (1 - k)).toFixed(2)}px)`;
 
 /**
  * Hero: a tilted glass "observation deck" holding the real-data 3D map of Maharashtra. Scrolling flattens and
@@ -38,6 +41,8 @@ const inset = (c: (typeof CARD)['desktop'], k: number) =>
 export function Hero() {
   const root = useRef<HTMLElement>(null);
   const progress = useRef(0);
+  /** visible card size as fractions of the canvas, so the 3D camera can fit the whole state inside it */
+  const fit = useRef({ h: 1 - DEFAULT_GEO.top - DEFAULT_GEO.bottom, w: 1 - 2 * DEFAULT_GEO.side });
   const tier = useTier();
   const [active, setActive] = useState(true);
 
@@ -59,45 +64,51 @@ export function Hero() {
         { desktop: '(min-width: 768px)', mobile: '(max-width: 767.98px)', reduce: '(prefers-reduced-motion: reduce)' },
         (ctx) => {
           const { desktop, reduce } = ctx.conditions as { desktop: boolean; reduce: boolean };
-          // never let the card slide under the copy on short viewports
-          const copyBottom = root.current?.querySelector('[data-hero-copy]')?.getBoundingClientRect().bottom ?? 0;
-          const base = desktop ? CARD.desktop : CARD.mobile;
-          const card = { ...base, top: Math.min(0.7, Math.max(base.top, (copyBottom + 28) / window.innerHeight)) };
-          root.current?.style.setProperty('--card-top', `${(card.top * 100).toFixed(2)}%`);
-          const frame = root.current?.querySelector<HTMLElement>('[data-hero-frame]');
-          const tilt = root.current?.querySelector<HTMLElement>('[data-hero-tilt]');
-          const canvas = root.current?.querySelector<HTMLElement>('[data-hero-canvas]');
-          if (!frame || !tilt || !canvas) return;
-          frame.style.clipPath = inset(card, 0);
-          const shift = canvasShift(card);
-          canvas.style.transform = `translateY(${shift.toFixed(2)}%)`;
-          if (reduce) {
-            tilt.style.transform = 'none';
-            return;
-          }
+          const el = root.current;
+          const stage = el?.querySelector<HTMLElement>('[data-hero-stage]');
+          const slot = el?.querySelector<HTMLElement>('[data-hero-slot]');
+          const frame = el?.querySelector<HTMLElement>('[data-hero-frame]');
+          const tilt = el?.querySelector<HTMLElement>('[data-hero-tilt]');
+          const canvas = el?.querySelector<HTMLElement>('[data-hero-canvas]');
+          if (!el || !stage || !slot || !frame || !tilt || !canvas) return;
+
+          const geo: CardGeo = { ...DEFAULT_GEO, radius: desktop ? 32 : 24 };
           const p = { k: 0 };
+          const apply = () => {
+            frame.style.clipPath = inset(geo, p.k);
+            canvas.style.transform = `translateY(${(canvasShift(geo) * (1 - p.k)).toFixed(2)}%)`;
+            const rx = reduce ? 0 : 16 * (1 - p.k);
+            const sc = reduce ? 1 : 0.95 + 0.05 * p.k;
+            tilt.style.transform = `perspective(1600px) rotateX(${rx.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+          };
+          // the card is wherever the layout slot under the copy ends up — re-measured on resize and font swaps,
+          // so the map can never slide under the headline or the buttons
+          const measure = () => {
+            const st = stage.getBoundingClientRect();
+            const r = slot.getBoundingClientRect();
+            if (!st.height || !st.width) return;
+            geo.top = (r.top - st.top) / st.height;
+            geo.bottom = (st.bottom - r.bottom) / st.height;
+            geo.side = (r.left - st.left) / st.width;
+            fit.current = { h: Math.max(0.2, 1 - geo.top - geo.bottom), w: Math.max(0.3, 1 - 2 * geo.side) };
+            el.style.setProperty('--card-top', `${(geo.top * 100).toFixed(3)}%`);
+            el.style.setProperty('--card-bottom', `${(geo.bottom * 100).toFixed(3)}%`);
+            el.style.setProperty('--card-side', `${(geo.side * 100).toFixed(3)}%`);
+            apply();
+          };
+          measure();
+          const ro = new ResizeObserver(measure);
+          ro.observe(slot);
+          ro.observe(stage);
+          document.fonts?.ready.then(measure);
+          if (reduce) return () => ro.disconnect();
+
           const spread = () => window.innerWidth * (desktop ? 0.16 : 0.05);
           const tl = gsap.timeline({
             defaults: { ease: 'none' },
-            scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: 0.8, invalidateOnRefresh: true },
+            scrollTrigger: { trigger: el, start: 'top top', end: 'bottom bottom', scrub: 0.8, invalidateOnRefresh: true },
           });
-          tl.fromTo(
-            p,
-            { k: 0 },
-            {
-              k: 1,
-              duration: 0.5,
-              ease: 'power2.inOut',
-              onUpdate: () => {
-                frame.style.clipPath = inset(card, p.k);
-                canvas.style.transform = `translateY(${(shift * (1 - p.k)).toFixed(2)}%)`;
-                const rx = 20 * (1 - p.k);
-                const s = 0.94 + 0.06 * p.k;
-                tilt.style.transform = `perspective(1600px) rotateX(${rx.toFixed(2)}deg) scale(${s.toFixed(4)})`;
-              },
-            },
-            0,
-          )
+          tl.fromTo(p, { k: 0 }, { k: 1, duration: 0.5, ease: 'power2.inOut', onUpdate: apply }, 0)
             .fromTo(progress, { current: 0 }, { current: 1, duration: 0.85, ease: 'power1.inOut' }, 0.05)
             .to('[data-hero-fade]', { autoAlpha: 0, y: -40, duration: 0.18, stagger: 0.02 }, 0)
             .to('[data-hero-split="left"]', { x: () => -spread(), duration: 0.45, ease: 'power2.inOut' }, 0.02)
@@ -111,7 +122,9 @@ export function Hero() {
             .to('[data-hero-panel], [data-hero-chip]', { autoAlpha: 0, y: -24, duration: 0.08 }, 0.9)
             .fromTo('[data-hero-outro]', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.12 }, 0.88);
           return () => {
-            frame.style.clipPath = inset(card, 0);
+            ro.disconnect();
+            p.k = 0;
+            apply();
           };
         },
       );
@@ -123,8 +136,8 @@ export function Hero() {
   const levels: Level[] = ['red', 'orange', 'yellow', 'green'];
 
   return (
-    <section ref={root} aria-labelledby="hero-title" className="relative h-[270svh] motion-reduce:h-svh [--card-bottom:3%] [--card-side:4%] [--card-top:50%] md:[--card-bottom:3.5%] md:[--card-side:7%] md:[--card-top:55%]">
-      <div className="sticky top-0 h-svh overflow-hidden">
+    <section ref={root} aria-labelledby="hero-title" className="relative h-[270svh] motion-reduce:h-svh [--card-bottom:3%] [--card-side:4%] [--card-top:56%] md:[--card-bottom:3.5%] md:[--card-side:7%]">
+      <div data-hero-stage className="sticky top-0 flex h-svh flex-col overflow-hidden">
         {/* atmosphere */}
         <div data-hero-bg aria-hidden className="atmosphere grain absolute -inset-[6%] will-change-transform">
           <div className="hairline-grid mask-radial absolute inset-0 opacity-70" />
@@ -134,20 +147,20 @@ export function Hero() {
 
         {/* the deck: full-viewport layer, clipped to a card and tilted; expands with scroll */}
         <div className="absolute inset-0 [perspective:1600px]">
-          <div data-hero-tilt className="absolute inset-0 origin-[50%_75%] will-change-transform" style={{ transform: 'perspective(1600px) rotateX(20deg) scale(0.94)' }}>
+          <div data-hero-tilt className="absolute inset-0 origin-[50%_78%] will-change-transform" style={{ transform: 'perspective(1600px) rotateX(16deg) scale(0.95)' }}>
             <div
               data-hero-edge
               aria-hidden
               className="pointer-events-none absolute z-[11] rounded-[33px] border border-line-strong shadow-[0_60px_120px_-40px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(236,240,241,0.12)] max-md:rounded-[25px]"
               style={{ top: 'calc(var(--card-top) - 1px)', left: 'calc(var(--card-side) - 1px)', right: 'calc(var(--card-side) - 1px)', bottom: 'calc(var(--card-bottom) - 1px)' }}
             />
-            <div data-hero-frame className="absolute inset-0 z-10 bg-abyss will-change-[clip-path]" style={{ clipPath: inset(CARD.desktop, 0) }}>
-              <div data-hero-canvas className="absolute inset-0 will-change-transform" style={{ transform: `translateY(${canvasShift(CARD.desktop).toFixed(2)}%)` }}>
+            <div data-hero-frame className="absolute inset-0 z-10 bg-abyss will-change-[clip-path]" style={{ clipPath: inset(DEFAULT_GEO, 0) }}>
+              <div data-hero-canvas className="absolute inset-0 will-change-transform" style={{ transform: `translateY(${canvasShift(DEFAULT_GEO).toFixed(2)}%)` }}>
                 {tier && tier !== 'off' ? (
-                  <HeatMap3D data={data} tier={tier} variant="hero" progressRef={progress} bfs={intel.bfs} labels={intel.ranking.slice(0, 3)} active={active} />
+                  <HeatMap3D data={data} tier={tier} variant="hero" progressRef={progress} fitRef={fit} bfs={intel.bfs} labels={intel.ranking.slice(0, 3)} active={active} />
                 ) : (
                   <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(ellipse_at_50%_55%,#2c3d50,#1a2531_70%)]">
-                    <DistrictSvgMap data={data} className="w-[min(70vw,760px)] opacity-95" showGraph label="Maharashtra heat map, 26 May 2024" />
+                    <DistrictSvgMap data={data} className="max-h-[34svh] w-auto max-w-[80vw] opacity-95" showGraph label="Maharashtra heat map, 26 May 2024" />
                   </div>
                 )}
               </div>
@@ -157,7 +170,7 @@ export function Hero() {
         </div>
 
         {/* copy — server-rendered and visible without JS */}
-        <div data-hero-copy className="pointer-events-none absolute inset-x-0 top-[14%] z-20 flex flex-col items-center px-4 text-center md:top-[11%]">
+        <div data-hero-copy className="pointer-events-none relative z-20 flex shrink-0 flex-col items-center px-4 pt-[max(5.75rem,11svh)] text-center md:pt-[max(6rem,9svh)]">
           <p data-hero-fade className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-white/[0.04] px-3.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.22em] text-fg-muted backdrop-blur">
             <span className="relative flex size-1.5">
               <span className="absolute inset-0 animate-ping rounded-full bg-cloud/70" />
@@ -176,10 +189,10 @@ export function Hero() {
               </span>
             </span>
           </h1>
-          <p data-hero-fade className="mt-4 text-[clamp(1rem,2vw,1.45rem)] font-medium tracking-tight text-fg-muted">
+          <p data-hero-fade className="mt-3 text-[clamp(1rem,2vw,1.45rem)] font-medium tracking-tight text-fg-muted">
             Sense the heat. <span className="text-cloud">Sync the response.</span>
           </p>
-          <div data-hero-fade className="pointer-events-auto mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div data-hero-fade className="pointer-events-auto mt-5 flex flex-wrap items-center justify-center gap-3">
             <Link href="/console" className={buttonClass('primary', 'lg', 'group')}>
               Open the console
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
@@ -189,6 +202,9 @@ export function Hero() {
             </Link>
           </div>
         </div>
+
+        {/* layout slot: the card fills whatever room is left under the copy (measured, never overlapping it) */}
+        <div data-hero-slot aria-hidden className="pointer-events-none mx-[4%] mb-[3%] mt-6 min-h-[32svh] flex-1 md:mx-[7%] md:mb-[3%] md:mt-7" />
 
         {/* expanded-state briefing */}
         <div data-hero-panel className="invisible absolute inset-x-3 bottom-4 z-30 opacity-0 sm:inset-x-auto sm:bottom-8 sm:left-8 sm:w-[25rem]">
