@@ -1,0 +1,458 @@
+HEATSYNC - Experiment 3 test session
+Program : exp3_rule_compiler.c
+Build   : gcc -std=c99 -Wall -Wextra -DECHO_INPUT -o exp3_rule_compiler.exe exp3_rule_compiler.c
+Run     : exp3_rule_compiler.exe < scripted input  (each input line is echoed after its prompt)
+----------------------------------------------------------------------
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 2
+  UNDERFLOW: stack is empty, nothing to pop.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 3
+  Stack is empty: no top element.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 4
+  Stack is empty (top = NULL).
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 1
+  Enter a single character to push: T
+  Pushed 'T'. Stack size = 1.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 1
+  Enter a single character to push: >
+  Pushed '>'. Stack size = 2.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 1
+  Enter a single character to push: &
+  Pushed '&'. Stack size = 3.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 4
+  Stack contents (3 element(s)):
+      | & |  <- top
+      | > |
+      | T |
+      +---+
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 3
+  Top element = '&'.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 2
+  Popped '&'. Stack size = 2.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 4
+  Stack contents (2 element(s)):
+      | > |  <- top
+      | T |
+      +---+
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 1
+  Enter a single character to push: ab
+  Invalid input 'ab': enter exactly one character.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Note: the stack held 2 element(s); it is re-created for the conversion.
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): T>39&D>4|T>44
+
+  Infix rule : T>39&D>4|T>44
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | T       | (empty)        | T                                        |
+  | >       | >              | T                                        |
+  | 39      | >              | T 39                                     |
+  | &       | &              | T 39 >                                   |
+  | D       | &              | T 39 > D                                 |
+  | >       | &>             | T 39 > D                                 |
+  | 4       | &>             | T 39 > D 4                               |
+  | |       | |              | T 39 > D 4 > &                           |
+  | T       | |              | T 39 > D 4 > & T                         |
+  | >       | |>             | T 39 > D 4 > & T                         |
+  | 44      | |>             | T 39 > D 4 > & T 44                      |
+  | (end)   | (empty)        | T 39 > D 4 > & T 44 > |                  |
+  +---------+----------------+------------------------------------------+
+  Postfix    : T 39 > D 4 > & T 44 > |
+
+  Enter station values for evaluation:
+    T  (Tmax, deg C)                 : 45.8
+    D  (departure from normal, deg C): 3.9
+    H  (relative humidity, %)        : 35
+    F  (feels-like, deg C)           : 43.5
+
+  Token   | Action                             | Value stack (bottom..top)
+  --------+------------------------------------+---------------------------
+  T       | push T = 45.8                      | 45.8 
+  39      | push constant                      | 45.8 39 
+  >       | 45.8 > 39 = 1                      | 1 
+  D       | push D = 3.9                       | 1 3.9 
+  4       | push constant                      | 1 3.9 4 
+  >       | 3.9 > 4 = 0                        | 1 0 
+  &       | 1 & 0 = 0                          | 0 
+  T       | push T = 45.8                      | 0 45.8 
+  44      | push constant                      | 0 45.8 44 
+  >       | 45.8 > 44 = 1                      | 0 1 
+  |       | 0 | 1 = 1                          | 1 
+
+  Result = 1  ->  RULE FIRES: raise heatwave alert for this station.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): (T>36&D>4)|F>50
+
+  Infix rule : (T>36&D>4)|F>50
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | (       | (              |                                          |
+  | T       | (              | T                                        |
+  | >       | (>             | T                                        |
+  | 36      | (>             | T 36                                     |
+  | &       | (&             | T 36 >                                   |
+  | D       | (&             | T 36 > D                                 |
+  | >       | (&>            | T 36 > D                                 |
+  | 4       | (&>            | T 36 > D 4                               |
+  | )       | (empty)        | T 36 > D 4 > &                           |
+  | |       | |              | T 36 > D 4 > &                           |
+  | F       | |              | T 36 > D 4 > & F                         |
+  | >       | |>             | T 36 > D 4 > & F                         |
+  | 50      | |>             | T 36 > D 4 > & F 50                      |
+  | (end)   | (empty)        | T 36 > D 4 > & F 50 > |                  |
+  +---------+----------------+------------------------------------------+
+  Postfix    : T 36 > D 4 > & F 50 > |
+
+  Enter station values for evaluation:
+    T  (Tmax, deg C)                 : 36.9
+    D  (departure from normal, deg C): -0.9
+    H  (relative humidity, %)        : 64
+    F  (feels-like, deg C)           : 40.6
+
+  Token   | Action                             | Value stack (bottom..top)
+  --------+------------------------------------+---------------------------
+  T       | push T = 36.9                      | 36.9 
+  36      | push constant                      | 36.9 36 
+  >       | 36.9 > 36 = 1                      | 1 
+  D       | push D = -0.9                      | 1 -0.9 
+  4       | push constant                      | 1 -0.9 4 
+  >       | -0.9 > 4 = 0                       | 1 0 
+  &       | 1 & 0 = 0                          | 0 
+  F       | push F = 40.6                      | 0 40.6 
+  50      | push constant                      | 0 40.6 50 
+  >       | 40.6 > 50 = 0                      | 0 0 
+  |       | 0 | 0 = 0                          | 0 
+
+  Result = 0  ->  Rule does not fire: no alert from this rule.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): (T>36 & D>4) | F>50
+
+  Infix rule : (T>36 & D>4) | F>50
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | (       | (              |                                          |
+  | T       | (              | T                                        |
+  | >       | (>             | T                                        |
+  | 36      | (>             | T 36                                     |
+  | &       | (&             | T 36 >                                   |
+  | D       | (&             | T 36 > D                                 |
+  | >       | (&>            | T 36 > D                                 |
+  | 4       | (&>            | T 36 > D 4                               |
+  | )       | (empty)        | T 36 > D 4 > &                           |
+  | |       | |              | T 36 > D 4 > &                           |
+  | F       | |              | T 36 > D 4 > & F                         |
+  | >       | |>             | T 36 > D 4 > & F                         |
+  | 50      | |>             | T 36 > D 4 > & F 50                      |
+  | (end)   | (empty)        | T 36 > D 4 > & F 50 > |                  |
+  +---------+----------------+------------------------------------------+
+  Postfix    : T 36 > D 4 > & F 50 > |
+
+  Enter station values for evaluation:
+    T  (Tmax, deg C)                 : 44.2
+    D  (departure from normal, deg C): 2.6
+    H  (relative humidity, %)        : 29
+    F  (feels-like, deg C)           : 45.9
+
+  Token   | Action                             | Value stack (bottom..top)
+  --------+------------------------------------+---------------------------
+  T       | push T = 44.2                      | 44.2 
+  36      | push constant                      | 44.2 36 
+  >       | 44.2 > 36 = 1                      | 1 
+  D       | push D = 2.6                       | 1 2.6 
+  4       | push constant                      | 1 2.6 4 
+  >       | 2.6 > 4 = 0                        | 1 0 
+  &       | 1 & 0 = 0                          | 0 
+  F       | push F = 45.9                      | 0 45.9 
+  50      | push constant                      | 0 45.9 50 
+  >       | 45.9 > 50 = 0                      | 0 0 
+  |       | 0 | 0 = 0                          | 0 
+
+  Result = 0  ->  Rule does not fire: no alert from this rule.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): (T>39&D>4|T>44
+
+  Infix rule : (T>39&D>4|T>44
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | (       | (              |                                          |
+  | T       | (              | T                                        |
+  | >       | (>             | T                                        |
+  | 39      | (>             | T 39                                     |
+  | &       | (&             | T 39 >                                   |
+  | D       | (&             | T 39 > D                                 |
+  | >       | (&>            | T 39 > D                                 |
+  | 4       | (&>            | T 39 > D 4                               |
+  | |       | (|             | T 39 > D 4 > &                           |
+  | T       | (|             | T 39 > D 4 > & T                         |
+  | >       | (|>            | T 39 > D 4 > & T                         |
+  | 44      | (|>            | T 39 > D 4 > & T 44                      |
+  +---------+----------------+------------------------------------------+
+  ERROR: mismatched parentheses: '(' is never closed
+  Rule rejected.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): T>39)&D>4
+
+  Infix rule : T>39)&D>4
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | T       | (empty)        | T                                        |
+  | >       | >              | T                                        |
+  | 39      | >              | T 39                                     |
+  +---------+----------------+------------------------------------------+
+  ERROR at position 5: mismatched parentheses: ')' has no matching '('
+  Rule rejected.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): T>>39
+
+  Infix rule : T>>39
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | T       | (empty)        | T                                        |
+  | >       | >              | T                                        |
+  +---------+----------------+------------------------------------------+
+  ERROR at position 3: operator '>' has no left operand
+  Rule rejected.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): T>39&X>2
+
+  Infix rule : T>39&X>2
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | T       | (empty)        | T                                        |
+  | >       | >              | T                                        |
+  | 39      | >              | T 39                                     |
+  | &       | &              | T 39 >                                   |
+  +---------+----------------+------------------------------------------+
+  ERROR at position 6: unknown variable 'X' (use T, D, H or F)
+  Rule rejected.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): T*10/0>1
+
+  Infix rule : T*10/0>1
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | T       | (empty)        | T                                        |
+  | *       | *              | T                                        |
+  | 10      | *              | T 10                                     |
+  | /       | /              | T 10 *                                   |
+  | 0       | /              | T 10 * 0                                 |
+  | >       | >              | T 10 * 0 /                               |
+  | 1       | >              | T 10 * 0 / 1                             |
+  | (end)   | (empty)        | T 10 * 0 / 1 >                           |
+  +---------+----------------+------------------------------------------+
+  Postfix    : T 10 * 0 / 1 >
+
+  Enter station values for evaluation:
+    T  (Tmax, deg C)                 : 40
+    D  (departure from normal, deg C): 1
+    H  (relative humidity, %)        : 1
+    F  (feels-like, deg C)           : 1
+
+  Token   | Action                             | Value stack (bottom..top)
+  --------+------------------------------------+---------------------------
+  T       | push T = 40                        | 40 
+  10      | push constant                      | 40 10 
+  *       | 40 * 10 = 400                      | 400 
+  0       | push constant                      | 400 0 
+  /       | ERROR: division by zero (400 / 0).
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 5
+  Enter heatwave rule in infix (e.g. T>39&D>4|T>44): T>39&
+
+  Infix rule : T>39&
+  +---------+----------------+------------------------------------------+
+  | Symbol  | Stack (bottom) | Postfix                                  |
+  +---------+----------------+------------------------------------------+
+  | T       | (empty)        | T                                        |
+  | >       | >              | T                                        |
+  | 39      | >              | T 39                                     |
+  | &       | &              | T 39 >                                   |
+  +---------+----------------+------------------------------------------+
+  ERROR: rule ends with an operator (missing right operand)
+  Rule rejected.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 7
+  Invalid choice 7. Please enter 1-6.
+
+========= HEATSYNC Rule Compiler (stack using SLL) =========
+1. Push a character
+2. Pop
+3. Peek (display top)
+4. Display stack
+5. Convert rule INFIX -> POSTFIX and evaluate
+6. Exit
+Enter your choice: 6
+  Stacks freed. Exiting.

@@ -1,0 +1,673 @@
+HEATSYNC - Experiment 4 test session
+Program : exp4_sensor_ring.c
+Build   : gcc -std=c99 -Wall -Wextra -DECHO_INPUT -o exp4_sensor_ring.exe exp4_sensor_ring.c
+Run     : exp4_sensor_ring.exe < scripted input  (each input line is echoed after its prompt)
+----------------------------------------------------------------------
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  UNDERFLOW: queue is empty, nothing to dequeue.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 3
+  Queue is empty: no front reading.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 4
+  [Method 1] front = 0, rear = -1, count = 0 / 6
+  Queue is empty: no readings buffered.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 5
+  Queue is empty: no readings to summarise.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 9
+  Enter temperature (deg C): 39.0
+  Enqueued 09:00 = 39.0 C at slot 0.
+  [Method 1] front = 0, rear = 0, count = 1 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 10
+  Enter temperature (deg C): 40.9
+  Enqueued 10:00 = 40.9 C at slot 1.
+  [Method 1] front = 0, rear = 1, count = 2 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 11
+  Enter temperature (deg C): 41.7
+  Enqueued 11:00 = 41.7 C at slot 2.
+  [Method 1] front = 0, rear = 2, count = 3 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 12
+  Enter temperature (deg C): 43.9
+  Enqueued 12:00 = 43.9 C at slot 3.
+  [Method 1] front = 0, rear = 3, count = 4 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 13
+  Enter temperature (deg C): 44.0
+  Enqueued 13:00 = 44.0 C at slot 4.
+  [Method 1] front = 0, rear = 4, count = 5 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 14
+  Enter temperature (deg C): 45.8
+  Enqueued 14:00 = 45.8 C at slot 5.
+  [Method 1] front = 0, rear = 5, count = 6 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  OVERFLOW: queue is full (6 readings). Dequeue first.
+  [Method 1] front = 0, rear = 5, count = 6 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 4
+  [Method 1] front = 0, rear = 5, count = 6 / 6
+  +-----+------+-------+--------+
+  | Pos | Slot | Hour  | Temp C |
+  +-----+------+-------+--------+
+  |   1 |    0 | 09:00 |   39.0 |  <- front (oldest)
+  |   2 |    1 | 10:00 |   40.9 |
+  |   3 |    2 | 11:00 |   41.7 |
+  |   4 |    3 | 12:00 |   43.9 |
+  |   5 |    4 | 13:00 |   44.0 |
+  |   6 |    5 | 14:00 |   45.8 |  <- rear (newest)
+  +-----+------+-------+--------+
+  Array: [0:09h 39.0] [1:10h 40.9] [2:11h 41.7] [3:12h 43.9] [4:13h 44.0] [5:14h 45.8] 
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 5
+  Rolling window: 6 reading(s), 09:00 to 14:00
+    Rolling max  : 45.8 C at 14:00
+    Rolling min  : 39.0 C at 09:00
+    Rolling mean : 42.55 C
+    Hours >= 40 C: 5 of 6
+    Status       : window max >= 45 C (IMD absolute heatwave threshold reached)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 09:00 = 39.0 C (oldest reading).
+  [Method 1] front = 1, rear = 5, count = 5 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 10:00 = 40.9 C (oldest reading).
+  [Method 1] front = 2, rear = 5, count = 4 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 12
+  Duplicate: a reading for 12:00 is already buffered.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 25
+  Invalid hour 25: must be 0-23.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 15
+  Enter temperature (deg C): hot
+  Invalid input 'hot': a number such as 41.7 is required.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 15
+  Enter temperature (deg C): 44.0
+  Enqueued 15:00 = 44.0 C at slot 0.
+  [Method 1] front = 2, rear = 0, count = 5 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 16
+  Enter temperature (deg C): 44.2
+  Enqueued 16:00 = 44.2 C at slot 1.
+  [Method 1] front = 2, rear = 1, count = 6 / 6
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 4
+  [Method 1] front = 2, rear = 1, count = 6 / 6
+  +-----+------+-------+--------+
+  | Pos | Slot | Hour  | Temp C |
+  +-----+------+-------+--------+
+  |   1 |    2 | 11:00 |   41.7 |  <- front (oldest)
+  |   2 |    3 | 12:00 |   43.9 |
+  |   3 |    4 | 13:00 |   44.0 |
+  |   4 |    5 | 14:00 |   45.8 |
+  |   5 |    0 | 15:00 |   44.0 |
+  |   6 |    1 | 16:00 |   44.2 |  <- rear (newest)
+  +-----+------+-------+--------+
+  Array: [0:15h 44.0] [1:16h 44.2] [2:11h 41.7] [3:12h 43.9] [4:13h 44.0] [5:14h 45.8] 
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 5
+  Rolling window: 6 reading(s), 11:00 to 16:00
+    Rolling max  : 45.8 C at 14:00
+    Rolling min  : 41.7 C at 11:00
+    Rolling mean : 43.93 C
+    Hours >= 40 C: 6 of 6
+    Status       : window max >= 45 C (IMD absolute heatwave threshold reached)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 3
+  Front reading: 11:00 = 41.7 C
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 1 - counter method (capacity 6)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 6
+  Switched to Method 2 (one slot left empty, capacity 5). Each method keeps its own queue.
+  [Method 2] front = 0, rear = 0, stored = 0 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 4
+  [Method 2] front = 0, rear = 0, stored = 0 / 5 (one slot kept empty)
+  Queue is empty: no readings buffered.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  UNDERFLOW: queue is empty, nothing to dequeue.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 13
+  Enter temperature (deg C): 44.0
+  Enqueued 13:00 = 44.0 C at slot 1.
+  [Method 2] front = 0, rear = 1, stored = 1 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 14
+  Enter temperature (deg C): 45.8
+  Enqueued 14:00 = 45.8 C at slot 2.
+  [Method 2] front = 0, rear = 2, stored = 2 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 15
+  Enter temperature (deg C): 44.0
+  Enqueued 15:00 = 44.0 C at slot 3.
+  [Method 2] front = 0, rear = 3, stored = 3 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 16
+  Enter temperature (deg C): 44.2
+  Enqueued 16:00 = 44.2 C at slot 4.
+  [Method 2] front = 0, rear = 4, stored = 4 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 17
+  Enter temperature (deg C): 43.6
+  Enqueued 17:00 = 43.6 C at slot 5.
+  [Method 2] front = 0, rear = 5, stored = 5 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  OVERFLOW: queue is full (5 readings). Dequeue first.
+  [Method 2] front = 0, rear = 5, stored = 5 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 4
+  [Method 2] front = 0, rear = 5, stored = 5 / 5 (one slot kept empty)
+  +-----+------+-------+--------+
+  | Pos | Slot | Hour  | Temp C |
+  +-----+------+-------+--------+
+  |   1 |    1 | 13:00 |   44.0 |  <- front (oldest)
+  |   2 |    2 | 14:00 |   45.8 |
+  |   3 |    3 | 15:00 |   44.0 |
+  |   4 |    4 | 16:00 |   44.2 |
+  |   5 |    5 | 17:00 |   43.6 |  <- rear (newest)
+  +-----+------+-------+--------+
+  Array: [0: ---- ] [1:13h 44.0] [2:14h 45.8] [3:15h 44.0] [4:16h 44.2] [5:17h 43.6] 
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 13:00 = 44.0 C (oldest reading).
+  [Method 2] front = 1, rear = 5, stored = 4 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 14:00 = 45.8 C (oldest reading).
+  [Method 2] front = 2, rear = 5, stored = 3 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 1
+  Enter hour (0-23): 18
+  Enter temperature (deg C): 41.6
+  Enqueued 18:00 = 41.6 C at slot 0.
+  [Method 2] front = 2, rear = 0, stored = 4 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 4
+  [Method 2] front = 2, rear = 0, stored = 4 / 5 (one slot kept empty)
+  +-----+------+-------+--------+
+  | Pos | Slot | Hour  | Temp C |
+  +-----+------+-------+--------+
+  |   1 |    3 | 15:00 |   44.0 |  <- front (oldest)
+  |   2 |    4 | 16:00 |   44.2 |
+  |   3 |    5 | 17:00 |   43.6 |
+  |   4 |    0 | 18:00 |   41.6 |  <- rear (newest)
+  +-----+------+-------+--------+
+  Array: [0:18h 41.6] [1: ---- ] [2: ---- ] [3:15h 44.0] [4:16h 44.2] [5:17h 43.6] 
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 5
+  Rolling window: 4 reading(s), 15:00 to 18:00
+    Rolling max  : 44.2 C at 16:00
+    Rolling min  : 41.6 C at 18:00
+    Rolling mean : 43.35 C
+    Hours >= 40 C: 4 of 4
+    Status       : window max >= 40 C (heat building, check departure)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 15:00 = 44.0 C (oldest reading).
+  [Method 2] front = 3, rear = 0, stored = 3 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 16:00 = 44.2 C (oldest reading).
+  [Method 2] front = 4, rear = 0, stored = 2 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 17:00 = 43.6 C (oldest reading).
+  [Method 2] front = 5, rear = 0, stored = 1 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  Dequeued 18:00 = 41.6 C (oldest reading).
+  [Method 2] front = 0, rear = 0, stored = 0 / 5 (one slot kept empty)
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 2
+  UNDERFLOW: queue is empty, nothing to dequeue.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 4
+  [Method 2] front = 0, rear = 0, stored = 0 / 5 (one slot kept empty)
+  Queue is empty: no readings buffered.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 0
+  Invalid choice 0. Please enter 1-7.
+
+====== HEATSYNC Sensor Ring (static circular queue, MAX = 6) ======
+Active: Method 2 - one slot left empty (capacity 5)
+1. Enqueue hourly reading
+2. Dequeue oldest reading
+3. Peek front reading
+4. Display queue
+5. Rolling max / mean of buffered readings
+6. Switch method (1 <-> 2)
+7. Exit
+Enter your choice: 7
+  Exiting sensor ring.

@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/*
+ * HEATSYNC palette — four colours, everything else is a tint or shade of them.
+ *   Soft Bright Gray #ECF0F1 · Silver #BDC3C7 · Wet Asphalt #33495D · Midnight Blue #2C3D50
+ * IMD's warning colours (yellow / orange / red) appear only as small semantic markers on data.
+ */
+@theme {
+  --color-cloud: #ecf0f1;
+  --color-silver: #bdc3c7;
+  --color-asphalt: #33495d;
+  --color-midnight: #2c3d50;
+
+  /* shades of Midnight Blue for depth */
+  --color-night: #233242;
+  --color-abyss: #1a2531;
+  --color-void: #121a23;
+
+  --color-fg: #ecf0f1;
+  --color-fg-muted: #bdc3c7;
+  --color-fg-subtle: #8a96a1;
+  --color-line: rgb(236 240 241 / 0.08);
+  --color-line-strong: rgb(236 240 241 / 0.16);
+
+  /* IMD colour-coded warnings (data markers only) */
+  --color-imd-green: #7fb69a;
+  --color-imd-yellow: #f2cf5b;
+  --color-imd-orange: #f29b54;
+  --color-imd-red: #e8655f;
+
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.6s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.45; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+}
+
+:root {
+  color-scheme: dark;
+  --bg: var(--color-abyss);
+  --nav-h: 4.5rem;
+}
+
+html {
+  background: var(--color-void);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-cloud);
+  color: var(--color-midnight);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+
+@layer utilities {
+  .tabular { font-variant-numeric: tabular-nums; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* the extended, heavy display cut used by the wordmark and big figures */
+  .font-wide {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-variation-settings: "wdth" 125;
+  }
+
+  .glass {
+    background: linear-gradient(180deg, rgb(51 73 93 / 0.42), rgb(44 61 80 / 0.32));
+    border: 1px solid var(--color-line);
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+  }
+  .glass-strong {
+    background: linear-gradient(180deg, rgb(51 73 93 / 0.78), rgb(35 50 66 / 0.82));
+    border: 1px solid var(--color-line-strong);
+    backdrop-filter: blur(22px) saturate(130%);
+    -webkit-backdrop-filter: blur(22px) saturate(130%);
+  }
+
+  /* film grain, used sparingly on large dark surfaces */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .atmosphere {
+    background:
+      radial-gradient(60% 50% at 20% 10%, rgb(51 73 93 / 0.55), transparent 70%),
+      radial-gradient(50% 45% at 85% 20%, rgb(44 61 80 / 0.7), transparent 70%),
+      radial-gradient(80% 60% at 50% 110%, rgb(189 195 199 / 0.06), transparent 70%),
+      var(--color-abyss);
+  }
+
+  .hairline-grid {
+    background-image:
+      linear-gradient(to right, rgb(236 240 241 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(236 240 241 / 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .mask-fade-y { mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent); }
+  .mask-fade-x { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+  .mask-radial { mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); }
+
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-thin { scrollbar-width: thin; scrollbar-color: var(--color-asphalt) transparent; }
+}
+
+/* focus ring that works on every surface */
+:focus-visible {
+  outline: 2px solid var(--color-cloud);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

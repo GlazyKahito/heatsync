@@ -1,0 +1,390 @@
+HEATSYNC - Experiment 5 test session
+Program : exp5_hotspot_bst.c
+Build   : gcc -std=c99 -Wall -Wextra -DECHO_INPUT -o exp5_hotspot_bst.exe exp5_hotspot_bst.c
+Run     : exp5_hotspot_bst.exe < scripted input  (each input line is echoed after its prompt)
+----------------------------------------------------------------------
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 5
+  BST is empty. Nothing to display.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 3
+  BST is empty. Nothing to search.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 4
+  UNDERFLOW: BST is empty, nothing to delete.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 1
+  Empty BST created (root = NULL).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Beed
+  Enter Tmax (deg C): 42.1
+  Inserted Beed with heat score 421 (42.1 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Pune
+  Enter Tmax (deg C): 34.5
+  Inserted Pune with heat score 345 (34.5 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Nagpur
+  Enter Tmax (deg C): 44.2
+  Inserted Nagpur with heat score 442 (44.2 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Mumbai City
+  Enter Tmax (deg C): 33.6
+  Inserted Mumbai City with heat score 336 (33.6 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Nandurbar
+  Enter Tmax (deg C): 40.1
+  Inserted Nandurbar with heat score 401 (40.1 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Jalgaon
+  Enter Tmax (deg C): 43.2
+  Inserted Jalgaon with heat score 432 (43.2 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Akola
+  Enter Tmax (deg C): 43.4
+  Inserted Akola with heat score 434 (43.4 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Kolhapur
+  Enter Tmax (deg C): 30.5
+  Inserted Kolhapur with heat score 305 (30.5 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Parbhani
+  Enter Tmax (deg C): 42.8
+  Inserted Parbhani with heat score 428 (42.8 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Hingoli
+  Enter Tmax (deg C): 42.4
+  Inserted Hingoli with heat score 424 (42.4 C).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Chandrapur
+  Enter Tmax (deg C): 43.2
+  Duplicate key: heat score 432 already belongs to Jalgaon. Not inserted.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Latur
+  Enter Tmax (deg C): abc
+  Invalid input 'abc': a temperature such as 43.2 is required.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 2
+  Enter district name: Wardha
+  Enter Tmax (deg C): 75
+  Invalid Tmax 75.0: must be between 0 and 60 C.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 5
+  Inorder (coolest -> hottest):
+    Kolhapur                    305 (30.5 C)
+    Mumbai City                 336 (33.6 C)
+    Pune                        345 (34.5 C)
+    Nandurbar                   401 (40.1 C)
+    Beed                        421 (42.1 C)
+    Hingoli                     424 (42.4 C)
+    Parbhani                    428 (42.8 C)
+    Jalgaon                     432 (43.2 C)
+    Akola                       434 (43.4 C)
+    Nagpur                      442 (44.2 C)
+  Reverse inorder = HOTSPOT RANKING (hottest first):
+    #1  Nagpur                      442 (44.2 C)  >=40 C
+    #2  Akola                       434 (43.4 C)  >=40 C
+    #3  Jalgaon                     432 (43.2 C)  >=40 C
+    #4  Parbhani                    428 (42.8 C)  >=40 C
+    #5  Hingoli                     424 (42.4 C)  >=40 C
+    #6  Beed                        421 (42.1 C)  >=40 C
+    #7  Nandurbar                   401 (40.1 C)  >=40 C
+    #8  Pune                        345 (34.5 C)
+    #9  Mumbai City                 336 (33.6 C)
+    #10 Kolhapur                    305 (30.5 C)
+  Preorder (keys): 421 345 336 305 401 442 432 428 424 434 
+  Nodes = 10, Height = 5 level(s)
+  Tree shape (rotated; right subtree above, left below):
+          442 Nagpur
+                      434 Akola
+                432 Jalgaon
+                      428 Parbhani
+                            424 Hingoli
+    421 Beed
+                401 Nandurbar
+          345 Pune
+                336 Mumbai City
+                      305 Kolhapur
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 3
+  Enter Tmax to search (deg C): 42.8
+  Search path: 421 -> 442 -> 432 -> 428  (found after 4 comparison(s))
+  Found: Parbhani with heat score 428 (42.8 C)
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 3
+  Enter Tmax to search (deg C): 41.0
+  Search path: 421 -> 345 -> 401 -> NULL  (not found after 3 comparison(s))
+  Not found: no district with heat score 410.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 4
+  Enter Tmax to delete (deg C): 43.4
+  Deleted Akola (score 434) - case 1: leaf node.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 4
+  Enter Tmax to delete (deg C): 33.6
+  Deleted Mumbai City (score 336) - case 2: node with one child.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 4
+  Enter Tmax to delete (deg C): 42.1
+  Inorder successor of 421 is 424 (Hingoli); it replaces the deleted node.
+  Deleted Beed (score 421) - case 3: node with two children.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 4
+  Enter Tmax to delete (deg C): 50.0
+  Not found: no district with heat score 500.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 5
+  Inorder (coolest -> hottest):
+    Kolhapur                    305 (30.5 C)
+    Pune                        345 (34.5 C)
+    Nandurbar                   401 (40.1 C)
+    Hingoli                     424 (42.4 C)
+    Parbhani                    428 (42.8 C)
+    Jalgaon                     432 (43.2 C)
+    Nagpur                      442 (44.2 C)
+  Reverse inorder = HOTSPOT RANKING (hottest first):
+    #1  Nagpur                      442 (44.2 C)  >=40 C
+    #2  Jalgaon                     432 (43.2 C)  >=40 C
+    #3  Parbhani                    428 (42.8 C)  >=40 C
+    #4  Hingoli                     424 (42.4 C)  >=40 C
+    #5  Nandurbar                   401 (40.1 C)  >=40 C
+    #6  Pune                        345 (34.5 C)
+    #7  Kolhapur                    305 (30.5 C)
+  Preorder (keys): 424 345 305 401 442 432 428 
+  Nodes = 7, Height = 4 level(s)
+  Tree shape (rotated; right subtree above, left below):
+          442 Nagpur
+                432 Jalgaon
+                      428 Parbhani
+    424 Hingoli
+                401 Nandurbar
+          345 Pune
+                305 Kolhapur
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 1
+  Old tree with 7 node(s) released.
+  Empty BST created (root = NULL).
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 5
+  BST is empty. Nothing to display.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 8
+  Invalid choice 8. Please enter 1-6.
+
+======= HEATSYNC Hotspot BST (key = Tmax in tenths of C) =======
+1. Create empty BST
+2. Insert district reading
+3. Search by Tmax
+4. Delete by Tmax
+5. Display all elements
+6. Exit
+Enter your choice: 6
+  Tree released. Exiting.

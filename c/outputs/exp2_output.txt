@@ -1,0 +1,281 @@
+HEATSYNC - Experiment 2 test session
+Program : exp2_alert_chain.c
+Build   : gcc -std=c99 -Wall -Wextra -DECHO_INPUT -o exp2_alert_chain.exe exp2_alert_chain.c
+Run     : exp2_alert_chain.exe < scripted input  (each input line is echoed after its prompt)
+----------------------------------------------------------------------
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 4
+  Alert chain is empty (head = NULL).
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 3
+  UNDERFLOW: list is empty, nothing to delete.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 2
+  List is empty: no existing node to insert after. Use option 1.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 1
+  Enter new bulletin number: 101
+  Enter district: Nagpur
+  Enter level (GREEN/YELLOW/ORANGE/RED): red
+  Enter Tmax (deg C): 45.8
+  Bulletin 101 (Nagpur, RED) inserted at the beginning.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 3
+  Delete the bulletin before which bulletin number? 101
+  Cannot delete: bulletin 101 is the first node, no node exists before it. (list has only 1 node)
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 1
+  Enter new bulletin number: 102
+  Enter district: Akola
+  Enter level (GREEN/YELLOW/ORANGE/RED): ORANGE
+  Enter Tmax (deg C): 45.0
+  Bulletin 102 (Akola, ORANGE) inserted at the beginning.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 1
+  Enter new bulletin number: 103
+  Enter district: Mumbai City
+  Enter level (GREEN/YELLOW/ORANGE/RED): GREEN
+  Enter Tmax (deg C): 33.4
+  Bulletin 103 (Mumbai City, GREEN) inserted at the beginning.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 2
+  Insert after which bulletin number? 102
+  Enter new bulletin number: 104
+  Enter district: Jalgaon
+  Enter level (GREEN/YELLOW/ORANGE/RED): Yellow
+  Enter Tmax (deg C): 42.2
+  Bulletin 104 inserted after bulletin 102.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 2
+  Insert after which bulletin number? 999
+  Not found: bulletin 999 is not in the chain.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 1
+  Enter new bulletin number: 101
+  Duplicate bulletin number 101: already in the chain.
+  Insert cancelled.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 1
+  Enter new bulletin number: 106
+  Enter district: Thane
+  Enter level (GREEN/YELLOW/ORANGE/RED): PURPLE
+  Invalid level 'PURPLE': use GREEN, YELLOW, ORANGE or RED.
+  Insert cancelled.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 4
+  Alert chain, newest first (4 bulletin(s))
+  +-----+----------+---------------------------+--------+--------+-----------+
+  | Pos | Bulletin | District                  | Level  | Tmax C | Next      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  |   1 |      103 | Mumbai City               | GREEN  |   33.4 | -> 102    |
+  |   2 |      102 | Akola                     | ORANGE |   45.0 | -> 104    |
+  |   3 |      104 | Jalgaon                   | YELLOW |   42.2 | -> 101    |
+  |   4 |      101 | Nagpur                    | RED    |   45.8 | NULL      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  head -> [103 GREEN] -> [102 ORANGE] -> [104 YELLOW] -> [101 RED] -> NULL
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 3
+  Delete the bulletin before which bulletin number? 104
+  Deleted bulletin 102 (Akola, ORANGE, 45.0 C) which was before 104.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 3
+  Delete the bulletin before which bulletin number? 103
+  Cannot delete: bulletin 103 is the first node, no node exists before it.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 3
+  Delete the bulletin before which bulletin number? 555
+  Not found: bulletin 555 is not in the chain.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 3
+  Delete the bulletin before which bulletin number? 102
+  Not found: bulletin 102 is not in the chain.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 4
+  Alert chain, newest first (3 bulletin(s))
+  +-----+----------+---------------------------+--------+--------+-----------+
+  | Pos | Bulletin | District                  | Level  | Tmax C | Next      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  |   1 |      103 | Mumbai City               | GREEN  |   33.4 | -> 104    |
+  |   2 |      104 | Jalgaon                   | YELLOW |   42.2 | -> 101    |
+  |   3 |      101 | Nagpur                    | RED    |   45.8 | NULL      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  head -> [103 GREEN] -> [104 YELLOW] -> [101 RED] -> NULL
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 2
+  Insert after which bulletin number? 101
+  Enter new bulletin number: 105
+  Enter district: Chandrapur
+  Enter level (GREEN/YELLOW/ORANGE/RED): YELLOW
+  Enter Tmax (deg C): 40.8
+  Bulletin 105 inserted after bulletin 101.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 4
+  Alert chain, newest first (4 bulletin(s))
+  +-----+----------+---------------------------+--------+--------+-----------+
+  | Pos | Bulletin | District                  | Level  | Tmax C | Next      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  |   1 |      103 | Mumbai City               | GREEN  |   33.4 | -> 104    |
+  |   2 |      104 | Jalgaon                   | YELLOW |   42.2 | -> 101    |
+  |   3 |      101 | Nagpur                    | RED    |   45.8 | -> 105    |
+  |   4 |      105 | Chandrapur                | YELLOW |   40.8 | NULL      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  head -> [103 GREEN] -> [104 YELLOW] -> [101 RED] -> [105 YELLOW] -> NULL
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 3
+  Delete the bulletin before which bulletin number? 104
+  Deleted bulletin 103 (Mumbai City, GREEN, 33.4 C) which was before 104.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 4
+  Alert chain, newest first (3 bulletin(s))
+  +-----+----------+---------------------------+--------+--------+-----------+
+  | Pos | Bulletin | District                  | Level  | Tmax C | Next      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  |   1 |      104 | Jalgaon                   | YELLOW |   42.2 | -> 101    |
+  |   2 |      101 | Nagpur                    | RED    |   45.8 | -> 105    |
+  |   3 |      105 | Chandrapur                | YELLOW |   40.8 | NULL      |
+  +-----+----------+---------------------------+--------+--------+-----------+
+  head -> [104 YELLOW] -> [101 RED] -> [105 YELLOW] -> NULL
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 7
+  Invalid choice 7. Please enter 1-5.
+
+========== HEATSYNC Alert Chain (singly linked list) ==========
+1. Insert bulletin at the beginning
+2. Insert bulletin after a specified bulletin
+3. Delete bulletin before a specified bulletin
+4. Display all bulletins (table)
+5. Exit
+Enter your choice: 5
+  Alert chain freed. Exiting.

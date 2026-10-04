@@ -1,0 +1,266 @@
+HEATSYNC - Experiment 1 test session
+Program : exp1_station_registry.c
+Build   : gcc -std=c99 -Wall -Wextra -DECHO_INPUT -o exp1_station_registry.exe exp1_station_registry.c
+Run     : exp1_station_registry.exe < scripted input  (each input line is echoed after its prompt)
+----------------------------------------------------------------------
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 4
+  Registry is empty. No stations to display.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 2
+  UNDERFLOW: registry is empty, nothing to delete.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 3
+  Registry is empty. Nothing to search.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 101
+  Enter station code (max 7 chars, e.g. NGP01): NGP01
+  Enter district name: Nagpur
+  Enter Tmax (deg C): 45.8
+  Inserted NGP01 (Nagpur, 45.8 C) at position 1.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 102
+  Enter station code (max 7 chars, e.g. NGP01): akl01
+  Enter district name: Akola
+  Enter Tmax (deg C): 45.0
+  Inserted AKL01 (Akola, 45.0 C) at position 2.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 102
+  Duplicate id 102: a station with this id already exists.
+  Insert cancelled.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 103
+  Enter station code (max 7 chars, e.g. NGP01): ngp01
+  Duplicate code NGP01: code already registered.
+  Insert cancelled.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 103
+  Enter station code (max 7 chars, e.g. NGP01): JLG01
+  Enter district name: Jalgaon
+  Enter Tmax (deg C): hot
+  Invalid input 'hot': a number such as 43.2 is required.
+  Insert cancelled.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 103
+  Enter station code (max 7 chars, e.g. NGP01): JLG01
+  Enter district name: Jalgaon
+  Enter Tmax (deg C): 42.2
+  Inserted JLG01 (Jalgaon, 42.2 C) at position 3.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 104
+  Enter station code (max 7 chars, e.g. NGP01): CHD01
+  Enter district name: Chandrapur
+  Enter Tmax (deg C): 40.8
+  Inserted CHD01 (Chandrapur, 40.8 C) at position 4.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  Enter station id (positive integer): 105
+  Enter station code (max 7 chars, e.g. NGP01): MUM01
+  Enter district name: Mumbai City
+  Enter Tmax (deg C): 33.4
+  Inserted MUM01 (Mumbai City, 33.4 C) at position 5.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 1
+  OVERFLOW: registry is full (5/5). Delete a station first.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 4
+  AWS registry (5 of 5 positions used)
+  +-----+------+---------+---------------------------+--------+------------------+
+  | Pos | ID   | Code    | District                  | Tmax C | IMD Tmax flag    |
+  +-----+------+---------+---------------------------+--------+------------------+
+  |   1 | 101  | NGP01   | Nagpur                    |   45.8 | HEATWAVE (>=45)  |
+  |   2 | 102  | AKL01   | Akola                     |   45.0 | HEATWAVE (>=45)  |
+  |   3 | 103  | JLG01   | Jalgaon                   |   42.2 | WATCH (>=40)     |
+  |   4 | 104  | CHD01   | Chandrapur                |   40.8 | WATCH (>=40)     |
+  |   5 | 105  | MUM01   | Mumbai City               |   33.4 | normal           |
+  +-----+------+---------+---------------------------+--------+------------------+
+  Hottest station : NGP01 (Nagpur) at 45.8 C
+  Stations >= 40 C: 4 of 5 (need departure-from-normal check for IMD heatwave)
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 3
+  Enter station code or district name: ngp01
+  +-----+------+---------+---------------------------+--------+------------------+
+  | Pos | ID   | Code    | District                  | Tmax C | IMD Tmax flag    |
+  +-----+------+---------+---------------------------+--------+------------------+
+  |   1 | 101  | NGP01   | Nagpur                    |   45.8 | HEATWAVE (>=45)  |
+  +-----+------+---------+---------------------------+--------+------------------+
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 3
+  Enter station code or district name: AKOLA
+  +-----+------+---------+---------------------------+--------+------------------+
+  | Pos | ID   | Code    | District                  | Tmax C | IMD Tmax flag    |
+  +-----+------+---------+---------------------------+--------+------------------+
+  |   2 | 102  | AKL01   | Akola                     |   45.0 | HEATWAVE (>=45)  |
+  +-----+------+---------+---------------------------+--------+------------------+
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 3
+  Enter station code or district name: Pune
+  Not found: no station with code or district 'Pune'.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 3
+  Enter station code or district name: 
+  Invalid input: search text cannot be empty.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 2
+  Deleted last station: MUM01 (Mumbai City, 33.4 C). 4 station(s) remain.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 4
+  AWS registry (4 of 5 positions used)
+  +-----+------+---------+---------------------------+--------+------------------+
+  | Pos | ID   | Code    | District                  | Tmax C | IMD Tmax flag    |
+  +-----+------+---------+---------------------------+--------+------------------+
+  |   1 | 101  | NGP01   | Nagpur                    |   45.8 | HEATWAVE (>=45)  |
+  |   2 | 102  | AKL01   | Akola                     |   45.0 | HEATWAVE (>=45)  |
+  |   3 | 103  | JLG01   | Jalgaon                   |   42.2 | WATCH (>=40)     |
+  |   4 | 104  | CHD01   | Chandrapur                |   40.8 | WATCH (>=40)     |
+  +-----+------+---------+---------------------------+--------+------------------+
+  Hottest station : NGP01 (Nagpur) at 45.8 C
+  Stations >= 40 C: 4 of 4 (need departure-from-normal check for IMD heatwave)
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 9
+  Invalid choice 9. Please enter 1-5.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: abc
+  Invalid input 'abc': a whole number is required.
+
+========= HEATSYNC AWS Station Registry (capacity 5) =========
+1. Insert station at last position
+2. Delete station from last position
+3. Search station (by code or district)
+4. Display complete registry
+5. Exit
+Enter your choice: 5
+  Exiting station registry.

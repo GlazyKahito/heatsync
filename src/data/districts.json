@@ -1,0 +1,701 @@
+[
+ {
+  "id": 0,
+  "name": "Mumbai City",
+  "aliases": [
+   "Mumbai",
+   "Bombay"
+  ],
+  "subdivision": "Konkan",
+  "division": "Konkan",
+  "coastal": true,
+  "hqPin": "400001",
+  "lat": 18.9721,
+  "lon": 72.8296,
+  "areaKm2": 88,
+  "neighbors": [
+   1
+  ]
+ },
+ {
+  "id": 1,
+  "name": "Mumbai Suburban",
+  "aliases": [
+   "Bandra",
+   "Mumbai Suburb"
+  ],
+  "subdivision": "Konkan",
+  "division": "Konkan",
+  "coastal": true,
+  "hqPin": "400051",
+  "lat": 19.1261,
+  "lon": 72.8965,
+  "areaKm2": 425,
+  "neighbors": [
+   0,
+   4
+  ]
+ },
+ {
+  "id": 2,
+  "name": "Palghar",
+  "aliases": [],
+  "subdivision": "Konkan",
+  "division": "Konkan",
+  "coastal": true,
+  "hqPin": "401404",
+  "lat": 19.7558,
+  "lon": 73.0939,
+  "areaKm2": 5368,
+  "neighbors": [
+   4,
+   8
+  ]
+ },
+ {
+  "id": 3,
+  "name": "Raigad",
+  "aliases": [
+   "Alibag",
+   "Kolaba"
+  ],
+  "subdivision": "Konkan",
+  "division": "Konkan",
+  "coastal": true,
+  "hqPin": "402201",
+  "lat": 18.4935,
+  "lon": 73.1425,
+  "areaKm2": 7005,
+  "neighbors": [
+   4,
+   5,
+   7,
+   10
+  ]
+ },
+ {
+  "id": 4,
+  "name": "Thane",
+  "aliases": [],
+  "subdivision": "Konkan",
+  "division": "Konkan",
+  "coastal": true,
+  "hqPin": "400601",
+  "lat": 19.355,
+  "lon": 73.3702,
+  "areaKm2": 4175,
+  "neighbors": [
+   1,
+   2,
+   3,
+   7,
+   8,
+   13
+  ]
+ },
+ {
+  "id": 5,
+  "name": "Ratnagiri",
+  "aliases": [],
+  "subdivision": "Konkan",
+  "division": "Konkan",
+  "coastal": true,
+  "hqPin": "415612",
+  "lat": 17.2829,
+  "lon": 73.4737,
+  "areaKm2": 8400,
+  "neighbors": [
+   3,
+   6,
+   9,
+   10,
+   14
+  ]
+ },
+ {
+  "id": 6,
+  "name": "Sindhudurg",
+  "aliases": [
+   "Oros"
+  ],
+  "subdivision": "Konkan",
+  "division": "Konkan",
+  "coastal": true,
+  "hqPin": "416812",
+  "lat": 16.1331,
+  "lon": 73.6527,
+  "areaKm2": 5167,
+  "neighbors": [
+   5,
+   9
+  ]
+ },
+ {
+  "id": 7,
+  "name": "Pune",
+  "aliases": [
+   "Poona"
+  ],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Pune",
+  "coastal": false,
+  "hqPin": "411001",
+  "lat": 18.6433,
+  "lon": 73.9225,
+  "areaKm2": 15729,
+  "neighbors": [
+   3,
+   4,
+   10,
+   13,
+   15
+  ]
+ },
+ {
+  "id": 8,
+  "name": "Nashik",
+  "aliases": [
+   "Nasik"
+  ],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Nashik",
+  "coastal": false,
+  "hqPin": "422001",
+  "lat": 20.2268,
+  "lon": 74.101,
+  "areaKm2": 15635,
+  "neighbors": [
+   2,
+   4,
+   12,
+   13,
+   16,
+   17
+  ]
+ },
+ {
+  "id": 9,
+  "name": "Kolhapur",
+  "aliases": [],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Pune",
+  "coastal": false,
+  "hqPin": "416001",
+  "lat": 16.4625,
+  "lon": 74.0896,
+  "areaKm2": 7716,
+  "neighbors": [
+   5,
+   6,
+   14
+  ]
+ },
+ {
+  "id": 10,
+  "name": "Satara",
+  "aliases": [],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Pune",
+  "coastal": false,
+  "hqPin": "415001",
+  "lat": 17.638,
+  "lon": 74.3008,
+  "areaKm2": 10655,
+  "neighbors": [
+   3,
+   5,
+   7,
+   14,
+   15
+  ]
+ },
+ {
+  "id": 11,
+  "name": "Nandurbar",
+  "aliases": [],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Nashik",
+  "coastal": false,
+  "hqPin": "425412",
+  "lat": 21.5142,
+  "lon": 74.5449,
+  "areaKm2": 5932,
+  "neighbors": [
+   12
+  ]
+ },
+ {
+  "id": 12,
+  "name": "Dhule",
+  "aliases": [
+   "Dhulia"
+  ],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Nashik",
+  "coastal": false,
+  "hqPin": "424001",
+  "lat": 21.132,
+  "lon": 74.4799,
+  "areaKm2": 7213,
+  "neighbors": [
+   8,
+   11,
+   16
+  ]
+ },
+ {
+  "id": 13,
+  "name": "Ahilyanagar",
+  "aliases": [
+   "Ahmednagar",
+   "Ahmadnagar"
+  ],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Nashik",
+  "coastal": false,
+  "hqPin": "414001",
+  "lat": 19.1576,
+  "lon": 74.856,
+  "areaKm2": 17146,
+  "neighbors": [
+   4,
+   7,
+   8,
+   15,
+   17,
+   18,
+   20
+  ]
+ },
+ {
+  "id": 14,
+  "name": "Sangli",
+  "aliases": [],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Pune",
+  "coastal": false,
+  "hqPin": "416416",
+  "lat": 17.1725,
+  "lon": 74.7749,
+  "areaKm2": 8518,
+  "neighbors": [
+   5,
+   9,
+   10,
+   15
+  ]
+ },
+ {
+  "id": 15,
+  "name": "Solapur",
+  "aliases": [
+   "Sholapur"
+  ],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Pune",
+  "coastal": false,
+  "hqPin": "413001",
+  "lat": 17.8511,
+  "lon": 75.2757,
+  "areaKm2": 14945,
+  "neighbors": [
+   7,
+   10,
+   13,
+   14,
+   20
+  ]
+ },
+ {
+  "id": 16,
+  "name": "Jalgaon",
+  "aliases": [],
+  "subdivision": "Madhya Maharashtra",
+  "division": "Nashik",
+  "coastal": false,
+  "hqPin": "425001",
+  "lat": 20.839,
+  "lon": 75.5295,
+  "areaKm2": 11761,
+  "neighbors": [
+   8,
+   12,
+   17,
+   19,
+   25
+  ]
+ },
+ {
+  "id": 17,
+  "name": "Chhatrapati Sambhajinagar",
+  "aliases": [
+   "Aurangabad"
+  ],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "431001",
+  "lat": 20.0255,
+  "lon": 75.1571,
+  "areaKm2": 10297,
+  "neighbors": [
+   8,
+   13,
+   16,
+   18,
+   19
+  ]
+ },
+ {
+  "id": 18,
+  "name": "Beed",
+  "aliases": [
+   "Bid",
+   "Bhir"
+  ],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "431122",
+  "lat": 18.9916,
+  "lon": 75.9115,
+  "areaKm2": 10620,
+  "neighbors": [
+   13,
+   17,
+   19,
+   20,
+   21,
+   22
+  ]
+ },
+ {
+  "id": 19,
+  "name": "Jalna",
+  "aliases": [],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "431203",
+  "lat": 19.9666,
+  "lon": 75.8282,
+  "areaKm2": 7752,
+  "neighbors": [
+   16,
+   17,
+   18,
+   21,
+   23,
+   25
+  ]
+ },
+ {
+  "id": 20,
+  "name": "Dharashiv",
+  "aliases": [
+   "Osmanabad"
+  ],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "413501",
+  "lat": 18.1709,
+  "lon": 76.1199,
+  "areaKm2": 7609,
+  "neighbors": [
+   13,
+   15,
+   18,
+   22
+  ]
+ },
+ {
+  "id": 21,
+  "name": "Parbhani",
+  "aliases": [],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "431401",
+  "lat": 19.2901,
+  "lon": 76.6267,
+  "areaKm2": 6422,
+  "neighbors": [
+   18,
+   19,
+   22,
+   23,
+   24
+  ]
+ },
+ {
+  "id": 22,
+  "name": "Latur",
+  "aliases": [],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "413512",
+  "lat": 18.3574,
+  "lon": 76.7584,
+  "areaKm2": 7275,
+  "neighbors": [
+   18,
+   20,
+   21,
+   24
+  ]
+ },
+ {
+  "id": 23,
+  "name": "Hingoli",
+  "aliases": [],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "431513",
+  "lat": 19.627,
+  "lon": 77.1934,
+  "areaKm2": 4700,
+  "neighbors": [
+   19,
+   21,
+   24,
+   25,
+   27,
+   29
+  ]
+ },
+ {
+  "id": 24,
+  "name": "Nanded",
+  "aliases": [],
+  "subdivision": "Marathwada",
+  "division": "Chhatrapati Sambhajinagar",
+  "coastal": false,
+  "hqPin": "431601",
+  "lat": 19.097,
+  "lon": 77.485,
+  "areaKm2": 10651,
+  "neighbors": [
+   21,
+   22,
+   23,
+   29
+  ]
+ },
+ {
+  "id": 25,
+  "name": "Buldhana",
+  "aliases": [
+   "Buldana"
+  ],
+  "subdivision": "Vidarbha",
+  "division": "Amravati",
+  "coastal": false,
+  "hqPin": "443001",
+  "lat": 20.5633,
+  "lon": 76.4107,
+  "areaKm2": 9794,
+  "neighbors": [
+   16,
+   19,
+   23,
+   26,
+   27,
+   28
+  ]
+ },
+ {
+  "id": 26,
+  "name": "Akola",
+  "aliases": [],
+  "subdivision": "Vidarbha",
+  "division": "Amravati",
+  "coastal": false,
+  "hqPin": "444001",
+  "lat": 20.7623,
+  "lon": 77.1917,
+  "areaKm2": 5434,
+  "neighbors": [
+   25,
+   27,
+   28
+  ]
+ },
+ {
+  "id": 27,
+  "name": "Washim",
+  "aliases": [
+   "Basim"
+  ],
+  "subdivision": "Vidarbha",
+  "division": "Amravati",
+  "coastal": false,
+  "hqPin": "444505",
+  "lat": 20.3065,
+  "lon": 77.2455,
+  "areaKm2": 5183,
+  "neighbors": [
+   23,
+   25,
+   26,
+   28,
+   29
+  ]
+ },
+ {
+  "id": 28,
+  "name": "Amravati",
+  "aliases": [
+   "Amraoti"
+  ],
+  "subdivision": "Vidarbha",
+  "division": "Amravati",
+  "coastal": false,
+  "hqPin": "444601",
+  "lat": 21.156,
+  "lon": 77.6433,
+  "areaKm2": 12275,
+  "neighbors": [
+   25,
+   26,
+   27,
+   29,
+   30,
+   31
+  ]
+ },
+ {
+  "id": 29,
+  "name": "Yavatmal",
+  "aliases": [
+   "Yeotmal"
+  ],
+  "subdivision": "Vidarbha",
+  "division": "Amravati",
+  "coastal": false,
+  "hqPin": "445001",
+  "lat": 20.0621,
+  "lon": 78.3564,
+  "areaKm2": 13599,
+  "neighbors": [
+   23,
+   24,
+   27,
+   28,
+   30,
+   32
+  ]
+ },
+ {
+  "id": 30,
+  "name": "Wardha",
+  "aliases": [],
+  "subdivision": "Vidarbha",
+  "division": "Nagpur",
+  "coastal": false,
+  "hqPin": "442001",
+  "lat": 20.8254,
+  "lon": 78.6162,
+  "areaKm2": 6339,
+  "neighbors": [
+   28,
+   29,
+   31,
+   32
+  ]
+ },
+ {
+  "id": 31,
+  "name": "Nagpur",
+  "aliases": [],
+  "subdivision": "Vidarbha",
+  "division": "Nagpur",
+  "coastal": false,
+  "hqPin": "440001",
+  "lat": 21.1499,
+  "lon": 79.0186,
+  "areaKm2": 9975,
+  "neighbors": [
+   28,
+   30,
+   32,
+   33
+  ]
+ },
+ {
+  "id": 32,
+  "name": "Chandrapur",
+  "aliases": [
+   "Chanda"
+  ],
+  "subdivision": "Vidarbha",
+  "division": "Nagpur",
+  "coastal": false,
+  "hqPin": "442401",
+  "lat": 20.099,
+  "lon": 79.5054,
+  "areaKm2": 11364,
+  "neighbors": [
+   29,
+   30,
+   31,
+   33,
+   35
+  ]
+ },
+ {
+  "id": 33,
+  "name": "Bhandara",
+  "aliases": [],
+  "subdivision": "Vidarbha",
+  "division": "Nagpur",
+  "coastal": false,
+  "hqPin": "441904",
+  "lat": 21.1206,
+  "lon": 79.7956,
+  "areaKm2": 4200,
+  "neighbors": [
+   31,
+   32,
+   34,
+   35
+  ]
+ },
+ {
+  "id": 34,
+  "name": "Gondia",
+  "aliases": [
+   "Gondiya"
+  ],
+  "subdivision": "Vidarbha",
+  "division": "Nagpur",
+  "coastal": false,
+  "hqPin": "441601",
+  "lat": 21.1474,
+  "lon": 80.27,
+  "areaKm2": 5176,
+  "neighbors": [
+   33,
+   35
+  ]
+ },
+ {
+  "id": 35,
+  "name": "Gadchiroli",
+  "aliases": [],
+  "subdivision": "Vidarbha",
+  "division": "Nagpur",
+  "coastal": false,
+  "hqPin": "442605",
+  "lat": 19.7539,
+  "lon": 80.1699,
+  "areaKm2": 14521,
+  "neighbors": [
+   32,
+   33,
+   34
+  ]
+ }
+]

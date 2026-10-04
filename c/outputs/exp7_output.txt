@@ -1,0 +1,336 @@
+HEATSYNC - Experiment 7 test session
+Program : exp7_archive_search.c
+Build   : gcc -std=c99 -Wall -Wextra -DECHO_INPUT -o exp7_archive_search.exe exp7_archive_search.c
+Run     : exp7_archive_search.exe < scripted input  (each input line is echoed after its prompt)
+----------------------------------------------------------------------
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 1
+  Nagpur daily Tmax, May 2024 - current order: NOT SORTED (chronological)
+  Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax
+    0   1  41.4   |    1   2  39.7   |    2   3  40.6   |    3   4  41.9
+    4   5  42.7   |    5   6  41.9   |    6   7  40.0   |    7   8  38.8
+    8   9  37.3   |    9  10  40.4   |   10  11  41.4   |   11  12  40.3
+   12  13  37.6   |   13  14  39.9   |   14  15  38.6   |   15  16  36.4
+   16  17  34.4   |   17  18  40.0   |   18  19  40.1   |   19  20  41.1
+   20  21  42.2   |   21  22  41.7   |   22  23  41.9   |   23  24  43.6
+   24  25  41.8   |   25  26  45.8   |   26  27  45.5   |   27  28  44.2
+   28  29  43.6   |   29  30  43.7   |   30  31  44.2
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 5
+  REFUSED: data is not sorted. Binary search needs ascending order -
+  sort first with option 3 (insertion sort) or option 4 (quick sort).
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 6
+  REFUSED: data is not sorted. The lower-bound binary search needs
+  ascending order - sort first with option 3 or 4.
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 3
+  Insertion sort on 31 records:
+    Comparisons = 171, Shifts (adjacent moves) = 146
+  Sorted flag set. Coolest: 34.4 C (17 May), hottest: 45.8 C (26 May).
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 1
+  Nagpur daily Tmax, May 2024 - current order: SORTED by Tmax (ascending)
+  Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax
+    0  17  34.4   |    1  16  36.4   |    2   9  37.3   |    3  13  37.6
+    4  15  38.6   |    5   8  38.8   |    6   2  39.7   |    7  14  39.9
+    8   7  40.0   |    9  18  40.0   |   10  19  40.1   |   11  12  40.3
+   12  10  40.4   |   13   3  40.6   |   14  20  41.1   |   15   1  41.4
+   16  11  41.4   |   17  22  41.7   |   18  25  41.8   |   19   4  41.9
+   20   6  41.9   |   21  23  41.9   |   22  21  42.2   |   23   5  42.7
+   24  24  43.6   |   25  29  43.6   |   26  30  43.7   |   27  28  44.2
+   28  31  44.2   |   29  27  45.5   |   30  26  45.8
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 5
+  Enter temperature to search (deg C): 44.2
+  Probe  low  high  mid  a[mid].tmax
+      1    0    30   15   41.4   < key, go right
+      2   16    30   23   42.7   < key, go right
+      3   24    30   27   44.2   match
+  FOUND 44.2 C after 3 probe(s) (sorted index 27). Matching day(s): 28 May (44.2) 31 May (44.2)
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 5
+  Enter temperature to search (deg C): 42.5
+  Probe  low  high  mid  a[mid].tmax
+      1    0    30   15   41.4   < key, go right
+      2   16    30   23   42.7   > key, go left
+      3   16    22   19   41.9   < key, go right
+      4   20    22   21   41.9   < key, go right
+      5   22    22   22   42.2   < key, go right
+  NOT FOUND: no day with 42.5 C (+/- 0.05) after 5 probe(s).
+  Insertion position = index 23 (between 42.2 C on 21 May and 42.7 C on 5 May)
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 5
+  Enter temperature to search (deg C): 50
+  Probe  low  high  mid  a[mid].tmax
+      1    0    30   15   41.4   < key, go right
+      2   16    30   23   42.7   < key, go right
+      3   24    30   27   44.2   < key, go right
+      4   28    30   29   45.5   < key, go right
+      5   30    30   30   45.8   < key, go right
+  NOT FOUND: no day with 50.0 C (+/- 0.05) after 5 probe(s).
+  Insertion position = index 31 (after the hottest day, 45.8 C)
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 5
+  Enter temperature to search (deg C): 30
+  Probe  low  high  mid  a[mid].tmax
+      1    0    30   15   41.4   > key, go left
+      2    0    14    7   39.9   > key, go left
+      3    0     6    3   37.6   > key, go left
+      4    0     2    1   36.4   > key, go left
+      5    0     0    0   34.4   > key, go left
+  NOT FOUND: no day with 30.0 C (+/- 0.05) after 5 probe(s).
+  Insertion position = index 0 (before the coolest day, 34.4 C)
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 5
+  Enter temperature to search (deg C): hot
+  Invalid input 'hot': a temperature such as 44.2 is required.
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 6
+  Count days with Tmax >= X. Enter X (deg C): 40
+  Probe  low  high  mid  a[mid].tmax
+      1    0    31   15   41.4   >= X, answer at mid or left
+      2    0    15    7   39.9   <  X, go right
+      3    8    15   11   40.3   >= X, answer at mid or left
+      4    8    11    9   40.0   >= X, answer at mid or left
+      5    8     9    8   40.0   >= X, answer at mid or left
+  First index with Tmax >= 40.0 is 8 (found in 5 probes).
+  Days with Tmax >= 40.0 C in May 2024: 23 of 31 -> 7(40.0) 18(40.0) 19(40.1) 12(40.3) 10(40.4) 3(40.6) 20(41.1) 1(41.4) 11(41.4) 22(41.7) 25(41.8) 4(41.9) 6(41.9) 23(41.9) 21(42.2) 5(42.7) 24(43.6) 29(43.6) 30(43.7) 28(44.2) 31(44.2) 27(45.5) 26(45.8)
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 6
+  Count days with Tmax >= X. Enter X (deg C): 45
+  Probe  low  high  mid  a[mid].tmax
+      1    0    31   15   41.4   <  X, go right
+      2   16    31   23   42.7   <  X, go right
+      3   24    31   27   44.2   <  X, go right
+      4   28    31   29   45.5   >= X, answer at mid or left
+      5   28    29   28   44.2   <  X, go right
+  First index with Tmax >= 45.0 is 29 (found in 5 probes).
+  Days with Tmax >= 45.0 C in May 2024: 2 of 31 -> 27(45.5) 26(45.8)
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 6
+  Count days with Tmax >= X. Enter X (deg C): 47
+  Probe  low  high  mid  a[mid].tmax
+      1    0    31   15   41.4   <  X, go right
+      2   16    31   23   42.7   <  X, go right
+      3   24    31   27   44.2   <  X, go right
+      4   28    31   29   45.5   <  X, go right
+      5   30    31   30   45.8   <  X, go right
+  First index with Tmax >= 47.0 is 31 (found in 5 probes).
+  Days with Tmax >= 47.0 C in May 2024: 0 of 31
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 2
+  Original chronological data reloaded. Sorted flag cleared.
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 1
+  Nagpur daily Tmax, May 2024 - current order: NOT SORTED (chronological)
+  Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax
+    0   1  41.4   |    1   2  39.7   |    2   3  40.6   |    3   4  41.9
+    4   5  42.7   |    5   6  41.9   |    6   7  40.0   |    7   8  38.8
+    8   9  37.3   |    9  10  40.4   |   10  11  41.4   |   11  12  40.3
+   12  13  37.6   |   13  14  39.9   |   14  15  38.6   |   15  16  36.4
+   16  17  34.4   |   17  18  40.0   |   18  19  40.1   |   19  20  41.1
+   20  21  42.2   |   21  22  41.7   |   22  23  41.9   |   23  24  43.6
+   24  25  41.8   |   25  26  45.8   |   26  27  45.5   |   27  28  44.2
+   28  29  43.6   |   29  30  43.7   |   30  31  44.2
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 4
+  Quick sort on 31 records:
+    Comparisons = 200, Swaps = 61
+  Sorted flag set. Coolest: 34.4 C (17 May), hottest: 45.8 C (26 May).
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 1
+  Nagpur daily Tmax, May 2024 - current order: SORTED by Tmax (ascending)
+  Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax   | Idx Day  Tmax
+    0  17  34.4   |    1  16  36.4   |    2   9  37.3   |    3  13  37.6
+    4  15  38.6   |    5   8  38.8   |    6   2  39.7   |    7  14  39.9
+    8   7  40.0   |    9  18  40.0   |   10  19  40.1   |   11  12  40.3
+   12  10  40.4   |   13   3  40.6   |   14  20  41.1   |   15  11  41.4
+   16   1  41.4   |   17  22  41.7   |   18  25  41.8   |   19   6  41.9
+   20  23  41.9   |   21   4  41.9   |   22  21  42.2   |   23   5  42.7
+   24  24  43.6   |   25  29  43.6   |   26  30  43.7   |   27  28  44.2
+   28  31  44.2   |   29  27  45.5   |   30  26  45.8
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 4
+  Quick sort on 31 records (input already sorted - worst case for last-element pivot):
+    Comparisons = 465, Swaps = 0
+  Sorted flag set. Coolest: 34.4 C (17 May), hottest: 45.8 C (26 May).
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 3
+  Insertion sort on 31 records (input already sorted - best case):
+    Comparisons = 30, Shifts (adjacent moves) = 0
+  Sorted flag set. Coolest: 34.4 C (17 May), hottest: 45.8 C (26 May).
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 9
+  Invalid choice 9. Please enter 1-7.
+
+====== HEATSYNC Archive Search (Nagpur Tmax, May 2024) ======
+1. Display records (current order)
+2. Reload original chronological data (unsorted)
+3. Sort by Tmax - insertion sort
+4. Sort by Tmax - quick sort
+5. Binary search for a temperature
+6. Count days with Tmax >= X (lower-bound binary search)
+7. Exit
+Enter your choice: 7
+  Exiting archive search.

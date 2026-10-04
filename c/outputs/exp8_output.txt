@@ -1,0 +1,578 @@
+HEATSYNC - Experiment 8 test session
+Program : exp8_station_dictionary.c
+Build   : gcc -std=c99 -Wall -Wextra -DECHO_INPUT -o exp8_station_dictionary.exe exp8_station_dictionary.c
+Run     : exp8_station_dictionary.exe < scripted input  (each input line is echoed after its prompt)
+----------------------------------------------------------------------
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 4
+  Hash table (SIZE = 13): 0 occupied, load factor = 0.00
+  +------+----------+---------------------------+--------+--------+------+-------+
+  | Slot | Status   | Key (district)            | PIN    | Tmax C | Home | Probe |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  |    0 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    1 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    2 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    3 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    4 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    5 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    6 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    7 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    8 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    9 | EMPTY    | -                         | -      |      - |    - |     - |
+  |   10 | EMPTY    | -                         | -      |      - |    - |     - |
+  |   11 | EMPTY    | -                         | -      |      - |    - |     - |
+  |   12 | EMPTY    | -                         | -      |      - |    - |     - |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  Home = hash(key); Probe = number of probes needed to reach the slot (1 = no collision).
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 2
+  Dictionary is empty. Nothing to search.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 3
+  UNDERFLOW: dictionary is empty, nothing to delete.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Nagpur
+  Enter HQ PIN code (6 digits): 440001
+  Enter latest Tmax (deg C): 44.2
+  hash("nagpur") = 4
+    probe  1: slot  4  EMPTY
+  Inserted "nagpur" at slot 4. (1/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Akola
+  Enter HQ PIN code (6 digits): 444001
+  Enter latest Tmax (deg C): 43.4
+  hash("akola") = 10
+    probe  1: slot 10  EMPTY
+  Inserted "akola" at slot 10. (2/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Jalgaon
+  Enter HQ PIN code (6 digits): 425001
+  Enter latest Tmax (deg C): 43.2
+  hash("jalgaon") = 7
+    probe  1: slot  7  EMPTY
+  Inserted "jalgaon" at slot 7. (3/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Chandrapur
+  Enter HQ PIN code (6 digits): 442401
+  Enter latest Tmax (deg C): 43.2
+  hash("chandrapur") = 5
+    probe  1: slot  5  EMPTY
+  Inserted "chandrapur" at slot 5. (4/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Amravati
+  Enter HQ PIN code (6 digits): 444601
+  Enter latest Tmax (deg C): 43.2
+  hash("amravati") = 6
+    probe  1: slot  6  EMPTY
+  Inserted "amravati" at slot 6. (5/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Nanded
+  Enter HQ PIN code (6 digits): 431601
+  Enter latest Tmax (deg C): 43.2
+  hash("nanded") = 4
+    probe  1: slot  4  OCCUPIED (nagpur)
+    probe  2: slot  5  OCCUPIED (chandrapur)
+    probe  3: slot  6  OCCUPIED (amravati)
+    probe  4: slot  7  OCCUPIED (jalgaon)
+    probe  5: slot  8  EMPTY
+  Inserted "nanded" at slot 8. (6/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Goa2
+  Invalid key 'goa2': only letters, spaces and '-' are allowed.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Latur
+  Enter HQ PIN code (6 digits): 4135
+  Invalid PIN '4135': must be exactly 6 digits.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Latur
+  Enter HQ PIN code (6 digits): 113512
+  Invalid PIN '113512': Maharashtra PIN codes start with 4.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Parbhani
+  Enter HQ PIN code (6 digits): 431401
+  Enter latest Tmax (deg C): 42.8
+  hash("parbhani") = 10
+    probe  1: slot 10  OCCUPIED (akola)
+    probe  2: slot 11  EMPTY
+  Inserted "parbhani" at slot 11. (7/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Hingoli
+  Enter HQ PIN code (6 digits): 431513
+  Enter latest Tmax (deg C): 42.4
+  hash("hingoli") = 4
+    probe  1: slot  4  OCCUPIED (nagpur)
+    probe  2: slot  5  OCCUPIED (chandrapur)
+    probe  3: slot  6  OCCUPIED (amravati)
+    probe  4: slot  7  OCCUPIED (jalgaon)
+    probe  5: slot  8  OCCUPIED (nanded)
+    probe  6: slot  9  EMPTY
+  Inserted "hingoli" at slot 9. (8/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Wardha
+  Enter HQ PIN code (6 digits): 442001
+  Enter latest Tmax (deg C): 42.4
+  hash("wardha") = 2
+    probe  1: slot  2  EMPTY
+  Inserted "wardha" at slot 2. (9/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Yavatmal
+  Enter HQ PIN code (6 digits): 445001
+  Enter latest Tmax (deg C): 42.4
+  hash("yavatmal") = 6
+    probe  1: slot  6  OCCUPIED (amravati)
+    probe  2: slot  7  OCCUPIED (jalgaon)
+    probe  3: slot  8  OCCUPIED (nanded)
+    probe  4: slot  9  OCCUPIED (hingoli)
+    probe  5: slot 10  OCCUPIED (akola)
+    probe  6: slot 11  OCCUPIED (parbhani)
+    probe  7: slot 12  EMPTY
+  Inserted "yavatmal" at slot 12. (10/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Beed
+  Enter HQ PIN code (6 digits): 431122
+  Enter latest Tmax (deg C): 42.1
+  hash("beed") = 1
+    probe  1: slot  1  EMPTY
+  Inserted "beed" at slot 1. (11/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Bhandara
+  Enter HQ PIN code (6 digits): 441904
+  Enter latest Tmax (deg C): 42.1
+  hash("bhandara") = 6
+    probe  1: slot  6  OCCUPIED (amravati)
+    probe  2: slot  7  OCCUPIED (jalgaon)
+    probe  3: slot  8  OCCUPIED (nanded)
+    probe  4: slot  9  OCCUPIED (hingoli)
+    probe  5: slot 10  OCCUPIED (akola)
+    probe  6: slot 11  OCCUPIED (parbhani)
+    probe  7: slot 12  OCCUPIED (yavatmal)
+    probe  8: slot  0  EMPTY
+  Inserted "bhandara" at slot 0. (12/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 4
+  Hash table (SIZE = 13): 12 occupied, load factor = 0.92
+  +------+----------+---------------------------+--------+--------+------+-------+
+  | Slot | Status   | Key (district)            | PIN    | Tmax C | Home | Probe |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  |    0 | OCCUPIED | bhandara                  | 441904 |   42.1 |    6 |     8 |
+  |    1 | OCCUPIED | beed                      | 431122 |   42.1 |    1 |     1 |
+  |    2 | OCCUPIED | wardha                    | 442001 |   42.4 |    2 |     1 |
+  |    3 | EMPTY    | -                         | -      |      - |    - |     - |
+  |    4 | OCCUPIED | nagpur                    | 440001 |   44.2 |    4 |     1 |
+  |    5 | OCCUPIED | chandrapur                | 442401 |   43.2 |    5 |     1 |
+  |    6 | OCCUPIED | amravati                  | 444601 |   43.2 |    6 |     1 |
+  |    7 | OCCUPIED | jalgaon                   | 425001 |   43.2 |    7 |     1 |
+  |    8 | OCCUPIED | nanded                    | 431601 |   43.2 |    4 |     5 |
+  |    9 | OCCUPIED | hingoli                   | 431513 |   42.4 |    4 |     6 |
+  |   10 | OCCUPIED | akola                     | 444001 |   43.4 |   10 |     1 |
+  |   11 | OCCUPIED | parbhani                  | 431401 |   42.8 |   10 |     2 |
+  |   12 | OCCUPIED | yavatmal                  | 445001 |   42.4 |    6 |     7 |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  Home = hash(key); Probe = number of probes needed to reach the slot (1 = no collision).
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Pune
+  Enter HQ PIN code (6 digits): 411001
+  Enter latest Tmax (deg C): 34.5
+  hash("pune") = 0
+    probe  1: slot  0  OCCUPIED (bhandara)
+    probe  2: slot  1  OCCUPIED (beed)
+    probe  3: slot  2  OCCUPIED (wardha)
+    probe  4: slot  3  EMPTY
+  Inserted "pune" at slot 3. (13/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Mumbai City
+  Enter HQ PIN code (6 digits): 400001
+  Enter latest Tmax (deg C): 33.6
+  hash("mumbai city") = 6
+    probe  1: slot  6  OCCUPIED (amravati)
+    probe  2: slot  7  OCCUPIED (jalgaon)
+    probe  3: slot  8  OCCUPIED (nanded)
+    probe  4: slot  9  OCCUPIED (hingoli)
+    probe  5: slot 10  OCCUPIED (akola)
+    probe  6: slot 11  OCCUPIED (parbhani)
+    probe  7: slot 12  OCCUPIED (yavatmal)
+    probe  8: slot  0  OCCUPIED (bhandara)
+    probe  9: slot  1  OCCUPIED (beed)
+    probe 10: slot  2  OCCUPIED (wardha)
+    probe 11: slot  3  OCCUPIED (pune)
+    probe 12: slot  4  OCCUPIED (nagpur)
+    probe 13: slot  5  OCCUPIED (chandrapur)
+  TABLE FULL: probed all 13 slots, no free slot for "mumbai city".
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key):   NAGPUR 
+  Enter HQ PIN code (6 digits): 440001
+  Enter latest Tmax (deg C): 45.8
+  hash("nagpur") = 4
+    probe  1: slot  4  OCCUPIED (nagpur)
+  Key "nagpur" already present at slot 4: value updated (PIN 440001, Tmax 45.8 C).
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 4
+  Hash table (SIZE = 13): 13 occupied, load factor = 1.00
+  +------+----------+---------------------------+--------+--------+------+-------+
+  | Slot | Status   | Key (district)            | PIN    | Tmax C | Home | Probe |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  |    0 | OCCUPIED | bhandara                  | 441904 |   42.1 |    6 |     8 |
+  |    1 | OCCUPIED | beed                      | 431122 |   42.1 |    1 |     1 |
+  |    2 | OCCUPIED | wardha                    | 442001 |   42.4 |    2 |     1 |
+  |    3 | OCCUPIED | pune                      | 411001 |   34.5 |    0 |     4 |
+  |    4 | OCCUPIED | nagpur                    | 440001 |   45.8 |    4 |     1 |
+  |    5 | OCCUPIED | chandrapur                | 442401 |   43.2 |    5 |     1 |
+  |    6 | OCCUPIED | amravati                  | 444601 |   43.2 |    6 |     1 |
+  |    7 | OCCUPIED | jalgaon                   | 425001 |   43.2 |    7 |     1 |
+  |    8 | OCCUPIED | nanded                    | 431601 |   43.2 |    4 |     5 |
+  |    9 | OCCUPIED | hingoli                   | 431513 |   42.4 |    4 |     6 |
+  |   10 | OCCUPIED | akola                     | 444001 |   43.4 |   10 |     1 |
+  |   11 | OCCUPIED | parbhani                  | 431401 |   42.8 |   10 |     2 |
+  |   12 | OCCUPIED | yavatmal                  | 445001 |   42.4 |    6 |     7 |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  Home = hash(key); Probe = number of probes needed to reach the slot (1 = no collision).
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 2
+  Enter district name to search: bhandara
+  hash("bhandara") = 6
+    probe  1: slot  6  OCCUPIED (amravati)
+    probe  2: slot  7  OCCUPIED (jalgaon)
+    probe  3: slot  8  OCCUPIED (nanded)
+    probe  4: slot  9  OCCUPIED (hingoli)
+    probe  5: slot 10  OCCUPIED (akola)
+    probe  6: slot 11  OCCUPIED (parbhani)
+    probe  7: slot 12  OCCUPIED (yavatmal)
+    probe  8: slot  0  OCCUPIED (bhandara)
+  FOUND "bhandara" at slot 0 after 8 probe(s): PIN 441904, Tmax 42.1 C.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 3
+  Enter district name to delete: chandrapur
+  hash("chandrapur") = 5
+    probe  1: slot  5  OCCUPIED (chandrapur)
+  Deleted "chandrapur": slot 5 marked DELETED (tombstone). (12/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 4
+  Hash table (SIZE = 13): 12 occupied, load factor = 0.92
+  +------+----------+---------------------------+--------+--------+------+-------+
+  | Slot | Status   | Key (district)            | PIN    | Tmax C | Home | Probe |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  |    0 | OCCUPIED | bhandara                  | 441904 |   42.1 |    6 |     8 |
+  |    1 | OCCUPIED | beed                      | 431122 |   42.1 |    1 |     1 |
+  |    2 | OCCUPIED | wardha                    | 442001 |   42.4 |    2 |     1 |
+  |    3 | OCCUPIED | pune                      | 411001 |   34.5 |    0 |     4 |
+  |    4 | OCCUPIED | nagpur                    | 440001 |   45.8 |    4 |     1 |
+  |    5 | DELETED  | (was chandrapur)          | -      |      - |    - |     - |
+  |    6 | OCCUPIED | amravati                  | 444601 |   43.2 |    6 |     1 |
+  |    7 | OCCUPIED | jalgaon                   | 425001 |   43.2 |    7 |     1 |
+  |    8 | OCCUPIED | nanded                    | 431601 |   43.2 |    4 |     5 |
+  |    9 | OCCUPIED | hingoli                   | 431513 |   42.4 |    4 |     6 |
+  |   10 | OCCUPIED | akola                     | 444001 |   43.4 |   10 |     1 |
+  |   11 | OCCUPIED | parbhani                  | 431401 |   42.8 |   10 |     2 |
+  |   12 | OCCUPIED | yavatmal                  | 445001 |   42.4 |    6 |     7 |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  Home = hash(key); Probe = number of probes needed to reach the slot (1 = no collision).
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 2
+  Enter district name to search: Hingoli
+  hash("hingoli") = 4
+    probe  1: slot  4  OCCUPIED (nagpur)
+    probe  2: slot  5  DELETED
+    probe  3: slot  6  OCCUPIED (amravati)
+    probe  4: slot  7  OCCUPIED (jalgaon)
+    probe  5: slot  8  OCCUPIED (nanded)
+    probe  6: slot  9  OCCUPIED (hingoli)
+  FOUND "hingoli" at slot 9 after 6 probe(s): PIN 431513, Tmax 42.4 C.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 2
+  Enter district name to search: mumbai city
+  hash("mumbai city") = 6
+    probe  1: slot  6  OCCUPIED (amravati)
+    probe  2: slot  7  OCCUPIED (jalgaon)
+    probe  3: slot  8  OCCUPIED (nanded)
+    probe  4: slot  9  OCCUPIED (hingoli)
+    probe  5: slot 10  OCCUPIED (akola)
+    probe  6: slot 11  OCCUPIED (parbhani)
+    probe  7: slot 12  OCCUPIED (yavatmal)
+    probe  8: slot  0  OCCUPIED (bhandara)
+    probe  9: slot  1  OCCUPIED (beed)
+    probe 10: slot  2  OCCUPIED (wardha)
+    probe 11: slot  3  OCCUPIED (pune)
+    probe 12: slot  4  OCCUPIED (nagpur)
+    probe 13: slot  5  DELETED
+  NOT FOUND: "mumbai city" is not in the dictionary (13 probe(s)).
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 3
+  Enter district name to delete: solapur
+  hash("solapur") = 0
+    probe  1: slot  0  OCCUPIED (bhandara)
+    probe  2: slot  1  OCCUPIED (beed)
+    probe  3: slot  2  OCCUPIED (wardha)
+    probe  4: slot  3  OCCUPIED (pune)
+    probe  5: slot  4  OCCUPIED (nagpur)
+    probe  6: slot  5  DELETED
+    probe  7: slot  6  OCCUPIED (amravati)
+    probe  8: slot  7  OCCUPIED (jalgaon)
+    probe  9: slot  8  OCCUPIED (nanded)
+    probe 10: slot  9  OCCUPIED (hingoli)
+    probe 11: slot 10  OCCUPIED (akola)
+    probe 12: slot 11  OCCUPIED (parbhani)
+    probe 13: slot 12  OCCUPIED (yavatmal)
+  NOT FOUND: "solapur" is not in the dictionary, nothing deleted.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 1
+  Enter district name (key): Mumbai City
+  Enter HQ PIN code (6 digits): 400001
+  Enter latest Tmax (deg C): 33.6
+  hash("mumbai city") = 6
+    probe  1: slot  6  OCCUPIED (amravati)
+    probe  2: slot  7  OCCUPIED (jalgaon)
+    probe  3: slot  8  OCCUPIED (nanded)
+    probe  4: slot  9  OCCUPIED (hingoli)
+    probe  5: slot 10  OCCUPIED (akola)
+    probe  6: slot 11  OCCUPIED (parbhani)
+    probe  7: slot 12  OCCUPIED (yavatmal)
+    probe  8: slot  0  OCCUPIED (bhandara)
+    probe  9: slot  1  OCCUPIED (beed)
+    probe 10: slot  2  OCCUPIED (wardha)
+    probe 11: slot  3  OCCUPIED (pune)
+    probe 12: slot  4  OCCUPIED (nagpur)
+    probe 13: slot  5  DELETED
+  Inserted "mumbai city" at slot 5. (13/13 occupied)
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 4
+  Hash table (SIZE = 13): 13 occupied, load factor = 1.00
+  +------+----------+---------------------------+--------+--------+------+-------+
+  | Slot | Status   | Key (district)            | PIN    | Tmax C | Home | Probe |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  |    0 | OCCUPIED | bhandara                  | 441904 |   42.1 |    6 |     8 |
+  |    1 | OCCUPIED | beed                      | 431122 |   42.1 |    1 |     1 |
+  |    2 | OCCUPIED | wardha                    | 442001 |   42.4 |    2 |     1 |
+  |    3 | OCCUPIED | pune                      | 411001 |   34.5 |    0 |     4 |
+  |    4 | OCCUPIED | nagpur                    | 440001 |   45.8 |    4 |     1 |
+  |    5 | OCCUPIED | mumbai city               | 400001 |   33.6 |    6 |    13 |
+  |    6 | OCCUPIED | amravati                  | 444601 |   43.2 |    6 |     1 |
+  |    7 | OCCUPIED | jalgaon                   | 425001 |   43.2 |    7 |     1 |
+  |    8 | OCCUPIED | nanded                    | 431601 |   43.2 |    4 |     5 |
+  |    9 | OCCUPIED | hingoli                   | 431513 |   42.4 |    4 |     6 |
+  |   10 | OCCUPIED | akola                     | 444001 |   43.4 |   10 |     1 |
+  |   11 | OCCUPIED | parbhani                  | 431401 |   42.8 |   10 |     2 |
+  |   12 | OCCUPIED | yavatmal                  | 445001 |   42.4 |    6 |     7 |
+  +------+----------+---------------------------+--------+--------+------+-------+
+  Home = hash(key); Probe = number of probes needed to reach the slot (1 = no collision).
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 6
+  Invalid choice 6. Please enter 1-5.
+
+===== HEATSYNC Station Dictionary (hash table, SIZE = 13) =====
+1. Insert / update district
+2. Search district
+3. Delete district
+4. Display all slots
+5. Exit
+Enter your choice: 5
+  Exiting station dictionary.
