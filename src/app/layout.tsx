@@ -8,7 +8,7 @@ const geist = Geist({ variable: '--font-geist', subsets: ['latin'], display: 'sw
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://heatsync.vercel.app'),
+  metadataBase: new URL('https://heatsync-mh.vercel.app'),
   title: { default: 'HEATSYNC — Sense the heat. Sync the response.', template: '%s · HEATSYNC' },
   description:
     'HEATSYNC turns raw temperature readings into a heatwave response for Maharashtra: hotspot ranking, contiguous heat clusters, relief staging and audience-specific advisories — every module powered by a classic data structure.',

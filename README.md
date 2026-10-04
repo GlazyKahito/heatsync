@@ -2,6 +2,8 @@
 
 **Sense the heat. Sync the response.**
 
+**Live:** https://heatsync-mh.vercel.app
+
 HEATSYNC is a heatwave response engine for Maharashtra. It turns raw temperature data into a coordinated response —
 a live hotspot ranking, contiguous heat zones, alert rings across district borders, relief staging from the nearest
 cooler district, and audience-specific advisories — and every one of those steps is powered by a classic data

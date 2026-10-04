@@ -263,7 +263,7 @@ export function PipelineSection() {
             <p data-panel-in className="mt-2 text-sm leading-relaxed text-fg-muted">
               {p.body}
             </p>
-            <div data-panel-in className="mt-auto pt-6">
+            <div data-panel-in className="my-auto pt-6">
               {p.viz}
             </div>
           </article>
