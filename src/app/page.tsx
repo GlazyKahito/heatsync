@@ -5,6 +5,7 @@ import { LivePulse } from '@/components/landing/live-pulse';
 import { PipelineSection } from '@/components/landing/pipeline';
 import { FinalCta, ModulesSection, ProblemSection, SiteFooter, UseCaseSection } from '@/components/landing/sections';
 import { SiteNav } from '@/components/landing/site-nav';
+import { VideoInterlude } from '@/components/landing/video-interlude';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <main id="main" tabIndex={-1} className="outline-none">
           <Hero />
           <ProblemSection />
+          <VideoInterlude />
           <ModulesSection />
           <PipelineSection />
           <LivePulse />

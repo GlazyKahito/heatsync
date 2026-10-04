@@ -4,6 +4,7 @@ import { Reveal } from '@/components/motion/reveal';
 import { buttonClass, Eyebrow } from '@/components/ui/primitives';
 import { Wordmark } from '@/components/brand/logo';
 import { cn } from '@/lib/utils';
+import { BgVideo } from './bg-video';
 import { SpotlightCard } from './spotlight-card';
 import { ArrayVisual, GraphVisual, HashVisual, ListVisual, RingVisual, SearchVisual, StackVisual, TreeVisual } from './module-visuals';
 
@@ -220,8 +221,13 @@ export function UseCaseSection() {
 export function FinalCta() {
   return (
     <Reveal as="section" aria-labelledby="cta-title" className="relative overflow-hidden px-4 py-32 sm:px-6 sm:py-44">
-      <div aria-hidden className="hairline-grid mask-radial absolute inset-0 opacity-60" />
-      <div aria-hidden className="absolute left-1/2 top-1/2 size-[60vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(189,195,199,0.12),transparent_60%)]" />
+      <div aria-hidden className="absolute inset-0">
+        <BgVideo src="/media/heat-47218.mp4" poster="/media/heat-47218.jpg" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(26,37,49,0.72),rgba(26,37,49,0.94)_70%)]" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-abyss to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-abyss to-transparent" />
+      </div>
+      <div aria-hidden className="hairline-grid mask-radial absolute inset-0 opacity-40" />
       <div className="relative mx-auto max-w-5xl text-center">
         <h2 id="cta-title" data-reveal="words" className="font-wide text-[clamp(2.6rem,8vw,7rem)] font-black leading-[0.9] tracking-[-0.045em] text-cloud">
           Heat moves. So should the response.
@@ -277,6 +283,7 @@ export function SiteFooter() {
             <li>Live guidance: Open-Meteo forecast API · CC BY 4.0</li>
             <li>District boundaries: geoBoundaries · ODbL</li>
             <li>Criteria: IMD heatwave definitions</li>
+            <li>Footage: Mixkit (free licence)</li>
           </ul>
         </div>
       </div>
