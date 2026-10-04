@@ -92,17 +92,15 @@ html.lenis body { height: auto; }
     font-variation-settings: "wdth" 125;
   }
 
+  /* Frosted look without backdrop-filter: a live blur re-renders every frame over the 3D canvas and moving
+     content, which is what makes scrolling stutter. Opaque-enough gradients read the same and cost nothing. */
   .glass {
-    background: linear-gradient(180deg, rgb(51 73 93 / 0.42), rgb(44 61 80 / 0.32));
+    background: linear-gradient(180deg, rgb(51 73 93 / 0.62), rgb(39 55 72 / 0.58));
     border: 1px solid var(--color-line);
-    backdrop-filter: blur(18px) saturate(120%);
-    -webkit-backdrop-filter: blur(18px) saturate(120%);
   }
   .glass-strong {
-    background: linear-gradient(180deg, rgb(51 73 93 / 0.78), rgb(35 50 66 / 0.82));
+    background: linear-gradient(180deg, rgb(51 73 93 / 0.94), rgb(35 50 66 / 0.95));
     border: 1px solid var(--color-line-strong);
-    backdrop-filter: blur(22px) saturate(130%);
-    -webkit-backdrop-filter: blur(22px) saturate(130%);
   }
 
   /* film grain, used sparingly on large dark surfaces */

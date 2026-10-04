@@ -13,7 +13,7 @@ const ENTER = 'top 86%';
 
 /**
  * Scroll reveals for everything inside. Markers:
- *   data-reveal            rise + fade + de-blur, batched so siblings stagger
+ *   data-reveal            rise + fade, batched so siblings stagger (transform/opacity only: compositor-friendly)
  *   data-reveal="words"    heading words rise out of per-line masks
  *   data-reveal="clip"     panel wipes open from the bottom
  *   data-reveal="scale"    panel grows from 92% with a soft fade
@@ -45,12 +45,12 @@ export function Reveal({
 
         const items = q('[data-reveal=""], [data-reveal="true"]') as HTMLElement[];
         if (items.length) {
-          gsap.set(items, { autoAlpha: 0, y: 36, filter: 'blur(6px)' });
+          gsap.set(items, { autoAlpha: 0, y: 36 });
           ScrollTrigger.batch(items, {
             start: ENTER,
             once: true,
             onEnter: (batch) =>
-              gsap.to(batch, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1.05, ease: 'power3.out', stagger: 0.08, overwrite: true, clearProps: 'filter' }),
+              gsap.to(batch, { autoAlpha: 1, y: 0, duration: 1.05, ease: 'power3.out', stagger: 0.08, overwrite: true }),
           });
         }
 

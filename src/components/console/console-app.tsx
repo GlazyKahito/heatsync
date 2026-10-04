@@ -62,7 +62,7 @@ export function ConsoleApp({ initialMode }: { initialMode: Mode }) {
   return (
     <div className="flex min-h-dvh flex-col bg-abyss lg:h-dvh lg:overflow-hidden">
       {/* top bar */}
-      <header className="z-30 flex flex-wrap items-center gap-3 border-b border-line bg-abyss/90 px-3 py-2.5 backdrop-blur sm:px-5">
+      <header className="z-30 flex flex-wrap items-center gap-3 border-b border-line bg-abyss px-3 py-2.5 sm:px-5">
         <Link href="/" className="flex items-center gap-2 rounded-full pr-2" aria-label="HEATSYNC home">
           <LogoMark className="size-7 text-cloud" />
           <span className="font-wide text-sm font-black tracking-[0.04em] text-cloud">HEATSYNC</span>

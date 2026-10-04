@@ -125,7 +125,7 @@ function ConversionTable({ steps, active }: { steps: readonly Step<InfixSnapshot
   return (
     <div ref={scroller} data-lenis-prevent className="scrollbar-thin relative max-h-[22rem] overflow-auto overscroll-contain rounded-2xl border border-line bg-void/50">
       <table className="w-full min-w-[30rem] text-left text-[12.5px]">
-        <thead className="sticky top-0 z-10 bg-night/95 backdrop-blur">
+        <thead className="sticky top-0 z-10 bg-night/95">
           <tr className="font-mono text-[10px] uppercase tracking-[0.14em] text-fg-subtle">
             <th scope="col" className="px-3 py-2 font-normal">#</th>
             <th scope="col" className="px-3 py-2 font-normal">Symbol</th>

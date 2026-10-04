@@ -75,7 +75,13 @@ export function buildLattice(width: number, height: number, spacing: number): La
   return { x, y, level, parent, maxLevel, count, order };
 }
 
-/** Draws the lattice with the BFS frontier at fractional level `front` (and an optional fade-out wave). */
+/** Frontier glow is quantised into a few brightness buckets so each bucket is a single path + fill. */
+const BUCKETS = 5;
+
+/**
+ * Draws the lattice with the BFS frontier at fractional level `front` (and an optional fade-out wave).
+ * Nodes are batched by state into one path per style — about a dozen fills per frame instead of one per node.
+ */
 export function drawLattice(ctx: CanvasRenderingContext2D, L: Lattice, front: number, dpr: number, fade = -1) {
   const { x, y, level, parent, count } = L;
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -94,30 +100,85 @@ export function drawLattice(ctx: CanvasRenderingContext2D, L: Lattice, front: nu
   ctx.strokeStyle = 'rgba(189,195,199,0.16)';
   ctx.stroke();
 
+  const unvisited = new Path2D();
+  const visited = new Path2D();
+  const glow: Path2D[] = [];
+  const core: Path2D[] = [];
+  for (let b = 0; b < BUCKETS; b++) {
+    glow.push(new Path2D());
+    core.push(new Path2D());
+  }
+  const dot = (path: Path2D, cx: number, cy: number, r: number) => {
+    path.moveTo(cx + r, cy);
+    path.arc(cx, cy, r, 0, Math.PI * 2);
+  };
   for (let i = 0; i < count; i++) {
     const lv = level[i];
     if (fade >= 0 && lv < fade) continue;
     const d = front - lv; // >0 visited, ~0 frontier, <0 unvisited
-    let r = 1.1;
-    let a = 0.13;
-    let col = '189,195,199';
-    if (d >= 0 && d < 1.2) {
+    if (d < 0) dot(unvisited, x[i], y[i], 1.1);
+    else if (d >= 1.2) dot(visited, x[i], y[i], 1.35);
+    else {
       const k = 1 - d / 1.2;
-      r = 1.4 + k * 2.2;
-      a = 0.5 + k * 0.5;
-      col = '255,255,255';
-      ctx.fillStyle = `rgba(236,240,241,${(0.12 * k).toFixed(3)})`;
-      ctx.beginPath();
-      ctx.arc(x[i], y[i], r * 3.2, 0, Math.PI * 2);
-      ctx.fill();
-    } else if (d >= 1.2) {
-      r = 1.35;
-      a = 0.5;
+      const b = Math.min(BUCKETS - 1, Math.floor(k * BUCKETS));
+      const r = 1.4 + ((b + 0.5) / BUCKETS) * 2.2;
+      dot(glow[b], x[i], y[i], r * 3.2);
+      dot(core[b], x[i], y[i], r);
     }
-    ctx.fillStyle = `rgba(${col},${a.toFixed(3)})`;
-    ctx.beginPath();
-    ctx.arc(x[i], y[i], r, 0, Math.PI * 2);
-    ctx.fill();
   }
+  ctx.fillStyle = 'rgba(189,195,199,0.13)';
+  ctx.fill(unvisited);
+  ctx.fillStyle = 'rgba(189,195,199,0.5)';
+  ctx.fill(visited);
+  for (let b = 0; b < BUCKETS; b++) {
+    const k = (b + 0.5) / BUCKETS;
+    ctx.fillStyle = `rgba(236,240,241,${(0.12 * k).toFixed(3)})`;
+    ctx.fill(glow[b]);
+    ctx.fillStyle = `rgba(255,255,255,${(0.5 + k * 0.5).toFixed(3)})`;
+    ctx.fill(core[b]);
+  }
+  ctx.restore();
+}
+
+/** Dots flying from the lattice into the wordmark's letterforms. */
+export interface Assembly {
+  /** 0..1 progress of the whole assembly */
+  t: number;
+  /** overall opacity (fades once the crisp wordmark has taken over) */
+  alpha: number;
+  src: Float32Array;
+  dst: Float32Array;
+  delay: Float32Array;
+  n: number;
+  size: number;
+}
+
+/** Lattice fading out underneath while the sampled dots converge onto the glyphs — one path, one fill. */
+export function drawAssembly(ctx: CanvasRenderingContext2D, L: Lattice, front: number, a: Assembly, dpr: number) {
+  drawLattice(ctx, L, front, dpr);
+  ctx.save();
+  // fade the lattice already drawn, then paint the flying dots on top
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillStyle = `rgba(0,0,0,${Math.min(1, a.t * 1.6).toFixed(3)})`;
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.scale(dpr, dpr);
+  const path = new Path2D();
+  for (let i = 0; i < a.n; i++) {
+    const k = Math.min(1, Math.max(0, (a.t - a.delay[i]) / 0.5));
+    const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    const sx = a.src[2 * i];
+    const sy = a.src[2 * i + 1];
+    const dx = a.dst[2 * i];
+    const dy = a.dst[2 * i + 1];
+    // a gentle arc towards the word
+    const lift = Math.sin(Math.PI * e) * 40;
+    const x = sx + (dx - sx) * e;
+    const y = sy + (dy - sy) * e - lift;
+    const s = 1.6 + (a.size - 1.6) * e;
+    path.rect(x - s / 2, y - s / 2, s, s);
+  }
+  ctx.fillStyle = `rgba(236,240,241,${(0.9 * a.alpha).toFixed(3)})`;
+  ctx.fill(path);
   ctx.restore();
 }

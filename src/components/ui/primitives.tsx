@@ -13,7 +13,7 @@ export function buttonClass(variant: Variant = 'primary', size: Size = 'md', ext
     size === 'lg' && 'h-13 px-7 text-[15px]',
     variant === 'primary' &&
       'bg-cloud text-midnight shadow-[0_10px_40px_-12px_rgba(236,240,241,0.55),inset_0_-2px_0_rgba(44,61,80,0.15)] hover:bg-white hover:shadow-[0_14px_50px_-12px_rgba(236,240,241,0.75)]',
-    variant === 'secondary' && 'border border-line-strong bg-asphalt/40 text-cloud backdrop-blur hover:border-silver/40 hover:bg-asphalt/70',
+    variant === 'secondary' && 'border border-line-strong bg-asphalt/70 text-cloud hover:border-silver/40 hover:bg-asphalt',
     variant === 'ghost' && 'text-fg-muted hover:bg-white/5 hover:text-cloud',
     variant === 'light' && 'bg-midnight text-cloud hover:bg-asphalt',
     extra,

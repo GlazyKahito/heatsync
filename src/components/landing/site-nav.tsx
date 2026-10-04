@@ -49,7 +49,7 @@ export function SiteNav({ solid = false }: { solid?: boolean }) {
         className={cn(
           'mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 rounded-full border pl-4 pr-2 transition-[background-color,border-color,box-shadow] duration-500',
           scrolled
-            ? 'border-line-strong bg-abyss/70 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-xl'
+            ? 'border-line-strong bg-abyss/92 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]'
             : 'border-transparent bg-transparent',
         )}
       >

@@ -185,7 +185,7 @@ export function PlayerBar<F>({ player, className }: { player: StepPlayer<F>; cla
   return (
     <div
       className={cn(
-        'rounded-[26px] border border-line-strong bg-[linear-gradient(180deg,rgba(44,61,80,0.97),rgba(35,50,66,0.97))] p-3 shadow-[0_30px_80px_-24px_rgba(0,0,0,0.9)] backdrop-blur-xl sm:p-4',
+        'rounded-[26px] border border-line-strong bg-[linear-gradient(180deg,rgba(44,61,80,0.97),rgba(35,50,66,0.97))] p-3 shadow-[0_30px_80px_-24px_rgba(0,0,0,0.9)] sm:p-4',
         className,
       )}
     >
